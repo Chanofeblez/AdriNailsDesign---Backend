@@ -61,11 +61,11 @@ public class AppointmentService {
         return appointmentRepository.findById(id);
     }
 
-    public List<Appointment> getAppointmentsByUserId(String userId) {
-        logger.info("user2", userId);
-        List<Appointment> appointmentResp = appointmentRepository.findByCustomerEmail(userId);
+    public List<Appointment> getAppointmentsByUserEmail(String userEmail) {
+        logger.info("user2", userEmail);
+        List<Appointment> appointmentResp = appointmentRepository.findByCustomerEmail(userEmail);
         logger.info("appointmentResp: {}", appointmentResp);
-        return appointmentRepository.findByCustomerEmail(userId);
+        return appointmentRepository.findByCustomerEmail(userEmail);
     }
 
     public Appointment createAppointment(String customerEmail, String serviceName, List<UUID> variantIds,

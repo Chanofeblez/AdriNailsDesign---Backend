@@ -1,7 +1,12 @@
 package com.nailsSalon.AdriDesign.course;
 
+import com.nailsSalon.AdriDesign.appointment.AppointmentController;
 import com.nailsSalon.AdriDesign.video.Video;
+import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,18 +18,28 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/courses")
+@CrossOrigin(origins = {"http://localhost:8100", "https://adrinailsdesign-c393e5baf34a.herokuapp.com"})
 public class CourseController {
+
+    private static final Logger logger = LoggerFactory.getLogger(CourseController.class);
 
     @Autowired
     private CourseService courseService;
 
     // Crear un curso con posibilidad de subir imagen y PDF
-    @PostMapping
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Course createCourse(
             @RequestPart("course") Course course,
             @RequestPart(value = "image", required = false) MultipartFile image,
             @RequestPart(value = "pdf", required = false) MultipartFile pdf,
-            @RequestPart(value = "videos", required = false) List<MultipartFile> videos) {
+            @RequestPart(value = "videos", required = false) List<MultipartFile> videos,
+            HttpServletRequest request) {
+
+        logger.info("course: {}", course);
+
+        // Medir el tamaño del contenido
+        int contentLength = request.getContentLength();
+        logger.info("Tamaño del payload recibido: {} bytes", contentLength);
 
         // Subir y almacenar la imagen
         if (image != null && !image.isEmpty()) {

@@ -50,9 +50,9 @@ public class AppointmentController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Appointment>> getAppointmentsByUser(@PathVariable String userId) {
-        logger.info("user", userId);
-        List<Appointment> appointments = appointmentService.getAppointmentsByUserId(userId);
+    public ResponseEntity<List<Appointment>> getAppointmentsByUserEmail(@PathVariable String userEmail) {
+        logger.info("user: {}", userEmail);
+        List<Appointment> appointments = appointmentService.getAppointmentsByUserEmail(userEmail);
         logger.info("appointment", appointments);
         return ResponseEntity.ok(appointments);
     }

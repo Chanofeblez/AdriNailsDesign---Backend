@@ -14,6 +14,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, UUID> 
     // Encuentra todas las citas para un cliente específico
     List<Appointment> findByCustomerEmail(String customerId);
 
+    List<Appointment> findByCustomerId(String customerId);
+
     // Encuentra todas las citas para un servicio específico
     List<Appointment> findByServiceName(String serviceName);
 
