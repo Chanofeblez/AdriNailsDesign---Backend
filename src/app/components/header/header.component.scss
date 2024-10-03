@@ -1,0 +1,32 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header-title {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+.header-logo {
+  max-height: 40px;
+  width: auto;
+}
+
+ion-toolbar {
+  --background: #D4A5A5; /* Rosa viejo */
+  --color: #ffffff; /* Blanco para el texto e iconos */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+ion-button {
+  --background: transparent;
+}
+
+ion-icon {
+  font-size: 1.4rem;
+}

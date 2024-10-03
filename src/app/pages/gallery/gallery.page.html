@@ -1,0 +1,72 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Image Manager</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="currentSegment" mode="md" color="primary" [scrollable]="true">
+      <ion-segment-button value="images">
+        <ion-label>Images</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="upload">
+        <ion-label>Upload</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="appointment-screen">
+    <!-- Mostrar imágenes subidas -->
+    <div class="list" *ngIf="currentSegment == 'images'">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6" size-md="4" size-lg="4" *ngFor="let image of images">
+            <ion-card>
+              <img [src]="imageUrl(image.id)" />
+              <ion-card-header>
+                <ion-card-title>{{ image.title }}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <p>Tipo: {{ image.type }}</p>
+                <ion-button color="danger" (click)="deleteImage(image.id)">
+                  <ion-icon name="trash"></ion-icon>
+                  Eliminar
+                </ion-button>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+    </div>
+
+    <!-- Formulario para subir nueva imagen -->
+<div class="upload-container" *ngIf="currentSegment == 'upload'">
+  <form (submit)="uploadImage()">
+    <ion-item>
+      <ion-label position="floating">Título de la imagen</ion-label>
+      <ion-input [(ngModel)]="title" name="title" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Seleccionar Imagen</ion-label>
+      <input type="file" (change)="onFileSelected($event)" required />
+    </ion-item>
+
+    <!-- Nuevo select para escoger Pedicure o Manicure -->
+    <ion-item>
+      <ion-label>Tipo</ion-label>
+      <ion-select [(ngModel)]="imageType" name="imageType" required>
+        <ion-select-option value="Manicure">Manicure</ion-select-option>
+        <ion-select-option value="Pedicure">Pedicure</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" class="ion-margin-top">Subir Imagen</ion-button>
+  </form>
+</div>
+  </div>
+</ion-content>
+
+

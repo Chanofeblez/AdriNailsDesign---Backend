@@ -1,0 +1,146 @@
+.ion-padding {
+  padding: 15px;
+}
+
+.appointment-screen {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.list ion-grid {
+  justify-content: center;
+}
+
+ion-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 3px;
+  width: 100%; /* Asegura que no se estire más de lo necesario */
+  //min-width: 200px; /* Controla el tamaño máximo de la tarjeta */
+  max-width: 250px; /* Controla el tamaño máximo de la tarjeta */
+  height: 270px;
+  display: block;
+}
+
+ion-card img {
+  border-radius: 10px 10px 0 0;
+  height: 150px;
+  object-fit: cover;
+  width: 100%;
+}
+
+ion-card-title {
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+ion-card-content {
+  padding: 3px;
+  text-align: center;
+}
+
+ion-card-content p {
+  font-size: 10px;
+  margin-top: 2px;
+}
+
+ion-card ion-label {
+  font-weight: bold;
+  font-size: 10px;
+  color: #333;
+}
+
+ion-segment {
+  --indicator-color: #E91E63; /* Cambia este color según el tema de tu app */
+  --background: transparent;
+  --border-radius: 10px;
+  --indicator-height: 2px;
+  font-size: 10px;
+}
+
+ion-segment-button {
+  --color-checked: #E91E63; /* Cambia este color según el tema de tu app */
+  font-weight: 600;
+}
+
+ion-segment-button ion-label {
+  font-size: 14px;
+}
+
+.upload-container {
+  margin-top: 20px;
+  padding: 15px;
+}
+
+ion-item {
+  --highlight-color-focused: #E91E63; /* Ajusta este color al de tu app */
+  --border-color: #E91E63;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+ion-label {
+  font-size: 10px;
+  color: #666; /* Color de texto */
+}
+
+input[type="file"] {
+  border: none;
+  padding: 10px 0;
+  font-size: 14px;
+  color: #666;
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+}
+
+ion-button {
+  --background: #e47096; /* Color del botón */
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --padding: 4px;
+  font-size: 12px;
+}
+
+ion-row {
+  justify-content: center; /* Para centrar las tarjetas si hay pocas */
+}
+
+ion-col {
+  min-width: 150px;
+  max-width: 420px; /* Limitar el ancho máximo de la tarjeta */
+}
+
+.elimi {
+  margin-top: 2px;
+  display: block;
+  width: 100%;
+}
+
+.ion-margin-top {
+  margin-top: 5px;
+}
+
+ion-select {
+  --padding-start: 5px;
+  --padding-end: 5px;
+  --background: #fff; /* Fondo blanco */
+  --border-radius: 8px;
+  --color: #333; /* Color del texto */
+  --placeholder-color: #666; /* Color del placeholder */
+}
+
+ion-select-option {
+  --color: #333; /* Color del texto de las opciones */
+
+}
+
+.upload-container ion-button {
+  --background: #E91E63; /* Color del botón */
+  --border-radius: 8px;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --padding: 12px;
+  font-size: 12px;
+}

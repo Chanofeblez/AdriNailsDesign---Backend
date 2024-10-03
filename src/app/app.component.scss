@@ -1,0 +1,17 @@
+/*
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+*/
+ion-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 10; /* Asegura que el footer esté sobre otros elementos, pero no sobre el contenido principal */
+}
+
+ion-content {
+  padding-bottom: 56px; /* Ajusta este valor dependiendo de la altura del footer */
+}

@@ -1,0 +1,25 @@
+<!--
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+-->
+<ion-content>
+  <div class="search-location-screen">
+    <div class="top-content">
+      <div class="header">
+        <ion-icon slot="icon-only" (click)="onBack()" name="chevron-back-outline" color="dark"
+          class="icon-btn"></ion-icon>
+        <ion-label class="lbl">You Location</ion-label>
+      </div>
+      <div class="searchbar">
+        <ion-searchbar placeholder="Search" inputmode="text" type="text"></ion-searchbar>
+      </div>
+    </div>
+    <div #map id="map" class="map"></div>
+    <div class="white-btn location-btn" (click)="onHome()">
+      <ion-icon name="locate-outline"></ion-icon>
+    </div>
+  </div>
+</ion-content>

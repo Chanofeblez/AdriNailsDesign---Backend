@@ -1,0 +1,124 @@
+<!--
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+-->
+<ion-header>
+  <ion-toolbar class="no-border">
+    <ion-buttons slot="start">
+      <ion-button (click)="onBack()" color="dark">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding no-border">
+  <ion-row class="align-center">
+    <ion-col size="12">
+      <ion-buttons>
+        <ion-button (click)="onBack()" color="dark" class="backicon">
+          <ion-icon slot="icon-only" name="chevron-back">Details</ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title class="back">Details</ion-title>
+    </ion-col>
+  </ion-row>
+
+  <div class="summary-screen">
+    <div class="salon-list" *ngIf="appointment">
+      <ion-row class="row-content">
+        <ion-col size="3">
+          <div class="cover" [ngStyle]="{'background-image': 'url(' + appointment.imagePath + ')'}"></div>
+        </ion-col>
+        <ion-col size="9">
+          <div class="content">
+            <div class="title-content-bottom">
+              <ion-label class="title"> {{appointment.serviceName}} </ion-label>
+            </div>
+            <ion-badge [color]="getStatusColor(appointment.status)">{{ appointment.status }}</ion-badge> <!-- Aquí añadimos el status -->
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="info-box">
+      <div class="info-row">
+        <div class="info-label">Date & Time:</div>
+        <div class="info-value">{{formattedAppointmentDateTime}}</div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <div class="info-row">
+        <div class="info-label">Name:</div>
+        <div class="info-value">{{ nombre?.name }}</div>
+      </div>
+
+      <div class="info-row">
+        <div class="info-label">PhoneNumber:</div>
+        <div class="info-value">{{ nombre?.phoneNumber }}</div>
+      </div>
+
+      <div class="info-row">
+        <div class="info-label">Email:</div>
+        <div class="info-value">{{ nombre?.email }}</div>
+      </div>
+    </div>
+
+
+    <div class="box-content">
+      <div class="top-content">
+        <ion-label class="info-label">Service Details</ion-label>
+      </div>
+      <div class="content">
+        <!-- Servicio principal -->
+        <div class="services-list-item">
+          <div class="name">
+            {{ serviceDetails?.name }}
+          </div>
+          <div class="price">
+            {{ serviceDetails?.price | currency: 'USD' }}
+          </div>
+        </div>
+
+        <!-- Variantes de servicios -->
+        <div *ngFor="let item of variants">
+          <div class="services-list-item">
+            <div class="name">
+              {{ item?.name }}
+            </div>
+            <div class="price">
+              {{ item?.price | currency: 'USD' }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Precio total -->
+        <div class="total-item-price">
+          <ion-label class="title">Total Price</ion-label>
+          <ion-label class="price">{{ totalPrice | currency: 'USD' }}</ion-label>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="appointment">
+      <div class="info-box1">
+        <div class="info-row">
+          <div class="info-label">Review:</div>
+          <div class="info-value">{{ appointment.review?.reviewText || 'No Review' }}</div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+  </div>
+</ion-content>
+

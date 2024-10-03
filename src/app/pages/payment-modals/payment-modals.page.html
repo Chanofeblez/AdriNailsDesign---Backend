@@ -1,0 +1,61 @@
+<!--
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+-->
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md">
+    <ion-title>Choose your Payment Option</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close('close')">
+        <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="payment-method-screen">
+    <ion-label class="sub-title">Select any one option suitable for you to complete the payment process</ion-label>
+    <ion-radio-group [(ngModel)]="selected">
+      <ion-item lines="none" class="item-content"
+        [ngStyle]="{'--background': selected == 'paypal' ? '#E0C4F7' : null }">
+        <ion-thumbnail slot="start">
+          <img src="assets/images/payments/paypal.png" />
+        </ion-thumbnail>
+        <ion-label class="lbl">PayPal</ion-label>
+        <ion-radio value="paypal" slot="end" mode="md" color="dark"></ion-radio>
+      </ion-item>
+      <ion-item lines="none" class="item-content" [ngStyle]="{'--background': selected == 'visa' ? '#E0C4F7' : null }">
+        <ion-thumbnail slot="start">
+          <img src="assets/images/payments/visa.png" />
+        </ion-thumbnail>
+        <ion-label class="lbl">Visa Card</ion-label>
+        <ion-radio value="visa" slot="end" mode="md" color="dark"></ion-radio>
+      </ion-item>
+      <ion-item lines="none" class="item-content" [ngStyle]="{'--background': selected == 'paytm' ? '#E0C4F7' : null }">
+        <ion-thumbnail slot="start">
+          <img src="assets/images/payments/paytm.png" />
+        </ion-thumbnail>
+        <ion-label class="lbl">PayTM</ion-label>
+        <ion-radio value="paytm" slot="end" mode="md" color="dark"></ion-radio>
+      </ion-item>
+      <ion-item lines="none" class="item-content" [ngStyle]="{'--background': selected == 'cash' ? '#E0C4F7' : null }">
+        <ion-thumbnail slot="start">
+          <img src="assets/images/payments/dollar.png" />
+        </ion-thumbnail>
+        <ion-label class="lbl">Cash on Shop</ion-label>
+        <ion-radio value="cash" slot="end" mode="md" color="dark"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="primary-btn" style="margin: 10px 0px;" (click)="close('ok')">
+      <ion-label class="lbl">Continue</ion-label>
+    </div>
+  </ion-toolbar>
+</ion-footer>

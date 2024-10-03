@@ -1,0 +1,108 @@
+<!--
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+-->
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>My Appointments</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment [(ngModel)]="currentSegment" mode="md" color="primary" [scrollable]="true">
+      <ion-segment-button value="upcoming">
+        <ion-label>Upcoming</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="completed">
+        <ion-label>Completed</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="customer">
+        <ion-label>Customers</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="appointment-screen">
+    <div class="list" *ngIf="currentSegment =='upcoming'">
+      <ion-row *ngFor="let appointment of appointments;let i =index;" class="row-content" (click)="onInfo(appointment)">
+        <ion-col size="3" >
+          <div class="cover" [ngStyle]="{'background-image': 'url(' + appointment.imagePath + ')'}"></div>
+        </ion-col>
+        <ion-col size="9">
+          <div class="content">
+            <ion-badge [color]="getStatusColor(appointment.status)">{{ appointment.status }}</ion-badge>
+            <ion-label class="name" > {{appointment.serviceName}} </ion-label>
+            <ion-label class="name">Name:
+              <span class="service-name"> {{ customerNames[appointment.customerEmail] }}</span>  <!-- Mostrar el nombre del cliente -->
+            </ion-label>
+            <ion-label class="name">Price:
+              <span class="service-name"> ${{ appointment.totalCost }}</span>  <!-- Mostrar el nombre del cliente -->
+            </ion-label>
+            <ion-label class="date" ><ion-icon name="time-outline" class="name" ></ion-icon> &nbsp; {{ appointment.appointmentDate }} {{ formatAppointmentTime(appointment.appointmentTime) }}</ion-label>
+          <!-- <div class="buttons">
+              <div class="completed">
+                <ion-label class="lbl">Completed</ion-label>
+              </div>
+              <div class="running" (click)="openReviews()">
+                <ion-label class="lbl">Review</ion-label>
+              </div>
+              <div class="pending">
+                <ion-label class="lbl">Pending</ion-label>
+              </div>
+            </div> -->
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="list" *ngIf="currentSegment =='completed'">
+      <ion-row *ngFor="let appointment of completedAppointments;let i =index;" class="row-content" (click)="onInfo(appointment)">
+        <ion-col size="3" >
+          <div class="cover" [ngStyle]="{'background-image': 'url(' + appointment.imagePath + ')'}"></div>
+        </ion-col>
+        <ion-col size="9">
+          <div class="content">
+            <ion-badge [color]="getStatusColor(appointment.status)">{{ appointment.status }}</ion-badge>
+            <ion-label class="name" > {{appointment.serviceName}} </ion-label>
+            <ion-label class="name">Name:
+              <span class="service-name"> {{ customerNames[appointment.customerEmail] }}</span>  <!-- Mostrar el nombre del cliente -->
+            </ion-label>
+            <ion-label class="name">Price:
+              <span class="service-name"> ${{ appointment.totalCost }}</span>  <!-- Mostrar el nombre del cliente -->
+            </ion-label>
+            <ion-label class="date" ><ion-icon name="time-outline" class="name" ></ion-icon> &nbsp; {{ appointment.appointmentDate }} {{ formatAppointmentTime(appointment.appointmentTime) }}</ion-label>
+          <!-- <div class="buttons">
+              <div class="completed">
+                <ion-label class="lbl">Completed</ion-label>
+              </div>
+              <div class="running" (click)="openReviews()">
+                <ion-label class="lbl">Review</ion-label>
+              </div>
+              <div class="pending">
+                <ion-label class="lbl">Pending</ion-label>
+              </div>
+            </div> -->
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="list" *ngIf="currentSegment =='customer'">
+      <div class="navigations-button" *ngFor="let customer of customers">
+        <div class="item-content" (click)="goToCustomerInfo(customer)">
+          <div class="prefix">
+            <div class="icon-content" [style.background-color]="getColor(customer)">
+              <ion-icon name="person-outline" color="dark"></ion-icon>
+            </div>
+            <ion-label class="title">{{ customer.name }}</ion-label>
+          </div>
+          <ion-icon name="chevron-forward-outline" color="dark"></ion-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

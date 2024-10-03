@@ -1,0 +1,163 @@
+<!--
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+-->
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <div class="home-header">
+      <div class="user-cover">
+        <div [ngStyle]="{'background-image': 'url(assets/images/avatar/1.jpg)'}" class="cover"></div>
+        <div class="name-content">
+          <ion-label class="name">John Cannery</ion-label>
+          <ion-label class="address"> <ion-icon name="location-outline" color="medium"></ion-icon> Bhavnagar, Gujarat,
+            India </ion-label>
+        </div>
+      </div>
+      <div class="notification-bell">
+        <ion-icon name="notifications-outline" color="dark"></ion-icon>
+      </div>
+    </div>
+  </ion-toolbar>
+  <ion-toolbar>
+    <div class="home-searchbar">
+      <div class="prefix">
+        <ion-icon name="search-outline" color="medium"></ion-icon>
+        <ion-label class="search-lbl">Search</ion-label>
+      </div>
+      <div class="filter">
+        <ion-icon name="options-outline" color="light"></ion-icon>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="home-screen">
+    <div class="slider">
+      <swiper-container #swiper slides-per-view="1.2" space-between="10">
+        <swiper-slide *ngFor="let item of util.categories.slice(0,3);let i =index;">
+          <div class="offers-data">
+            <ion-row>
+              <ion-col size="7">
+                <div class="name-content">
+                  <ion-label class="name">30% Off</ion-label>
+                  <ion-label class="title"> {{item.name}} </ion-label>
+                  <ion-label class="name-service">Hair-styling & treatment</ion-label>
+                  <div class="btn">
+                    <ion-label class="lbl">Explore</ion-label>
+                  </div>
+                </div>
+              </ion-col>
+              <ion-col size="5">
+                <img src="assets/images/sliders/{{i+1}}.png" alt="" class="img">
+              </ion-col>
+            </ion-row>
+          </div>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+    <div class="main-title">
+      <ion-label class="title">Services</ion-label>
+      <ion-label class="btn" (click)="onPage('services')">View All</ion-label>
+    </div>
+
+    <div class="categories-slider">
+      <swiper-container #swiper slides-per-view="4.5" space-between="10">
+        <swiper-slide *ngFor="let item of util.categories;">
+          <div class="category-info" (click)="onSalonList(item.name)">
+            <div class="circle-content">
+              <img [src]="item.image" alt="" class="img">
+            </div>
+            <ion-label class="name">{{ (item.name.length>8)? (item.name | slice:0:8)+'..':(item.name) }}</ion-label>
+          </div>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+
+    <div class="main-title">
+      <ion-label class="title">Nearby Salons</ion-label>
+      <ion-label class="btn" (click)="onPage('near-salon')">View All</ion-label>
+    </div>
+
+    <div class="salon-slider">
+      <swiper-container #swiper slides-per-view="1.2" space-between="10">
+        <swiper-slide *ngFor="let item of util.salonList;let i =index;">
+          <div class="salon-info" (click)="onInfo(i)">
+            <div class="cover" [ngStyle]="{'background-image': 'url('+item.cover+')'}">
+              <div class="off"> <ion-label class="lbl">20%</ion-label> </div>
+              <div class="favourite"> <ion-icon name="heart-outline" color="medium"></ion-icon> </div>
+            </div>
+            <div class="title-content">
+              <ion-label class="title"> {{item.name}} </ion-label>
+              <div class="end-date"> <ion-icon name="star" color="warning"></ion-icon> <ion-label class="lbl">
+                  {{item.rate}}
+                </ion-label> </div>
+            </div>
+            <div class="address-content">
+              <ion-icon name="location-outline" color="medium"></ion-icon>
+              <ion-label class="address">{{ (item.address.length>25)? (item.address | slice:0:25)+'..':(item.address)
+                }}</ion-label>
+            </div>
+            <div class="bottom-content">
+              <div class="prefix">
+                <ion-icon name="walk-outline"></ion-icon>
+                <ion-label class="distance"> {{item.distance}} </ion-label>
+              </div>
+              <div class="open-lbl" *ngIf="i % 2 == 0">
+                <ion-label class="lbl">Open</ion-label>
+              </div>
+              <div class="close-lbl" *ngIf="i % 2 != 0">
+                <ion-label class="lbl">Close</ion-label>
+              </div>
+            </div>
+          </div>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+
+    <div class="main-title">
+      <ion-label class="title">Popular Salons</ion-label>
+      <ion-label class="btn" (click)="onPage('popular-salon')">View All</ion-label>
+    </div>
+    <div class="salon-list">
+      <ion-row *ngFor="let item of util.salonList;let i =index;" class="row-content" (click)="onInfo(i)">
+        <ion-col size="3">
+          <div class="cover" [ngStyle]="{'background-image': 'url('+item.cover+')'}">
+            <div class="favourite"> <ion-icon name="heart-outline" color="medium"></ion-icon> </div>
+          </div>
+        </ion-col>
+        <ion-col size="9">
+          <div class="content">
+            <div class="title-content-bottom">
+              <ion-label class="title"> {{item.name}} </ion-label>
+              <div class="end-date"> <ion-icon name="star" color="warning"></ion-icon> <ion-label class="lbl">
+                  {{item.rate}}
+                </ion-label> </div>
+            </div>
+            <div class="address-content-bottom">
+              <ion-icon name="location-outline" color="medium"></ion-icon>
+              <ion-label class="address">{{ (item.address.length>25)? (item.address | slice:0:25)+'..':(item.address)
+                }}</ion-label>
+            </div>
+            <div class="bottom-content-bottom">
+              <div class="prefix">
+                <ion-icon name="walk-outline"></ion-icon>
+                <ion-label class="distance"> {{item.distance}} </ion-label>
+              </div>
+              <div class="open-lbl" *ngIf="i % 2 == 0">
+                <ion-label class="lbl">Open</ion-label>
+              </div>
+              <div class="close-lbl" *ngIf="i % 2 != 0">
+                <ion-label class="lbl">Close</ion-label>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>
+

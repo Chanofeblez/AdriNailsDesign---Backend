@@ -1,0 +1,111 @@
+<!--
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+-->
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-button (click)="onBack()" color="dark">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Summary</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="summary-screen">
+
+    <div class="salon-list">
+      <ion-row *ngFor="let item of util.salonList.slice(0,1);let i =index;" class="row-content">
+        <ion-col size="3">
+          <div class="cover" [ngStyle]="{'background-image': 'url('+item.cover+')'}">
+            <div class="favourite"> <ion-icon name="heart-outline" color="medium"></ion-icon> </div>
+          </div>
+        </ion-col>
+        <ion-col size="9">
+          <div class="content">
+            <div class="title-content-bottom">
+              <ion-label class="title"> {{item.name}} </ion-label>
+              <div class="end-date"> <ion-icon name="star" color="warning"></ion-icon> <ion-label class="lbl">
+                  {{item.rate}}
+                </ion-label> </div>
+            </div>
+            <div class="address-content-bottom">
+              <ion-icon name="location-outline" color="medium"></ion-icon>
+              <ion-label class="address">{{ (item.address.length>25)? (item.address | slice:0:25)+'..':(item.address)
+                }}</ion-label>
+            </div>
+            <div class="bottom-content-bottom">
+              <div class="prefix">
+                <ion-icon name="walk-outline"></ion-icon>
+                <ion-label class="distance"> {{item.distance}} </ion-label>
+              </div>
+              <div class="open-lbl" *ngIf="i % 2 == 0">
+                <ion-label class="lbl">Open</ion-label>
+              </div>
+              <div class="close-lbl" *ngIf="i % 2 != 0">
+                <ion-label class="lbl">Close</ion-label>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </div>
+
+    <div class="date-time">
+      <ion-label class="lbl">Date & Time</ion-label>
+      <ion-label class="time">Mon 12, Aug - 10:00 AM</ion-label>
+    </div>
+
+    <div class="date-time">
+      <ion-label class="lbl">Gender Type</ion-label>
+      <ion-label class="time">Man</ion-label>
+    </div>
+
+    <div class="box-content">
+      <div class="top-content">
+        <ion-label class="lbl">Service List</ion-label>
+      </div>
+      <div class="content">
+        <ion-item *ngFor="let item of util.categories.slice(0,3);let i = index;" lines="none"
+          class="services-list-item">
+          <ion-label slot="start" class="name">{{item.name}}</ion-label>
+          <ion-label slot="end" class="time">{{i+5}} min</ion-label>
+          <ion-label class="price" slot="end">₹{{i+3}}.00</ion-label>
+        </ion-item>
+        <ion-item lines="none" class="services-list-item">
+          <ion-label slot="start" class="name">CGST</ion-label>
+          <ion-label class="price" slot="end">₹30.00</ion-label>
+        </ion-item>
+        <ion-item lines="none" class="services-list-item">
+          <ion-label slot="start" class="name">SGST</ion-label>
+          <ion-label class="price" slot="end">₹30.00</ion-label>
+        </ion-item>
+      </div>
+    </div>
+
+    <div class="total-item">
+      <ion-label class="title">Total Item (3)</ion-label>
+      <ion-label class="price">₹30.00</ion-label>
+    </div>
+    <div class="total-item">
+      <ion-label class="title">Coupon Discount</ion-label>
+      <ion-label class="price">₹30.00</ion-label>
+    </div>
+    <div class="total-item-price">
+      <ion-label class="title">Total Price</ion-label>
+      <ion-label class="price">₹96.00</ion-label>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="primary-btn" style="margin: 10px 0px;" (click)="openPaymentModal()">
+      <ion-label class="lbl">Continue</ion-label>
+    </div>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,265 @@
+<!--
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+-->
+<ion-content>
+  <div class="salon-info-screen">
+    <div class="top-header">
+      <div class="top-btn">
+        <ion-button (click)="onBack()" fill="clear" color="light" size="small">
+          <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+        </ion-button>
+        <div class="right-content">
+          <div class="content">
+            <ion-icon name="heart" color="warning"></ion-icon>
+          </div>
+          <div class="content">
+            <ion-icon name="share-social" color="primary"></ion-icon>
+          </div>
+        </div>
+      </div>
+      <div class="progress">
+        <div [ngClass]="activeIndex == item ? 'active-dots':'dots'" *ngFor="let item of [0,1,2,3,4]"></div>
+      </div>
+      <swiper-container #swiper (slidechange)="changed()" slides-per-view="1" autoplay="true">
+        <swiper-slide *ngFor="let item of [1,2,3,4,5]">
+          <div class="top-gallery-content"
+            [ngStyle]="{'background-image': 'url(assets/images/salon-cover/'+item+'.png)'}">
+            <div class="overlay"></div>
+          </div>
+        </swiper-slide>
+      </swiper-container>
+    </div>
+
+    <div class="name-content">
+      <div class="top-content">
+        <ion-label class="title">{{name}}</ion-label>
+        <div class="options"> <ion-label class="lbl">Open</ion-label> </div>
+      </div>
+      <ion-label class="address"> <ion-icon name="location" color="medium"> </ion-icon> &nbsp; {{address}} </ion-label>
+      <ion-label class="address"> <ion-icon name="star" color="warning"> </ion-icon> &nbsp; {{rate}} (5,696
+        reviews) </ion-label>
+    </div>
+
+    <ion-segment [(ngModel)]="activeContent" mode="md" scrollable="true" class="options">
+      <ion-segment-button value="about">
+        <ion-label>About</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="services">
+        <ion-label>Services</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="portfolio">
+        <ion-label>Portfolio</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="reviews">
+        <ion-label>Reviews</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div class="about-content" *ngIf="activeContent == 'about'">
+      <div class="box-content">
+        <div class="top-content">
+          <ion-label class="lbl">About Us</ion-label>
+          <ion-icon name="chevron-up" color="dark"></ion-icon>
+        </div>
+        <div class="content">
+          <ion-label class="desc"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+            Ipsum
+            has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+            type
+            and scrambled it to make a type specimen book.</ion-label>
+        </div>
+      </div>
+
+      <div class="box-content">
+        <div class="top-content">
+          <ion-label class="lbl">Our Staff</ion-label>
+          <ion-icon name="chevron-up" color="dark"></ion-icon>
+        </div>
+        <div class="content">
+          <div class="staff-list" *ngFor="let item of util.userList.slice(0,5);">
+            <div class="prefix">
+              <div class="avatar" [ngStyle]="{'background-image': 'url('+item.image+')'}"></div>
+              <div class="name">
+                <ion-label class="title">{{item.name}}</ion-label>
+                <ion-label class="spec">Hair Stylist</ion-label>
+              </div>
+            </div>
+            <ion-label class="rate"> <ion-icon name="star" color="warning"></ion-icon> &nbsp; 5.0 </ion-label>
+          </div>
+        </div>
+      </div>
+
+      <div class="box-content">
+        <div class="top-content">
+          <ion-label class="lbl">Open - Closed</ion-label>
+          <ion-icon name="chevron-up" color="dark"></ion-icon>
+        </div>
+        <div class="content">
+          <div class="days-list" *ngFor="let item of util.dayList;">
+            <ion-label class="lbl">{{item.name}}</ion-label>
+            <ion-label class="lbl">{{item.time}}</ion-label>
+          </div>
+        </div>
+      </div>
+
+      <div class="box-content">
+        <div class="top-content">
+          <ion-label class="lbl">Contact Us</ion-label>
+          <ion-icon name="chevron-up" color="dark"></ion-icon>
+        </div>
+        <div class="content">
+          <ion-item class="item-content" lines="none">
+            <ion-icon slot="start" name="mail-outline"></ion-icon>
+            <ion-label class="lbl">rahul@initappz.com</ion-label>
+          </ion-item>
+          <ion-item class="item-content" lines="none">
+            <ion-icon slot="start" name="call-outline"></ion-icon>
+            <ion-label class="lbl">+91 963-669-2584</ion-label>
+          </ion-item>
+          <ion-item class="item-content" lines="none">
+            <ion-icon slot="start" name="globe-outline"></ion-icon>
+            <ion-label class="lbl">https://initappz.com</ion-label>
+          </ion-item>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="services-content" *ngIf="activeContent =='services'">
+      <div class="box-content" *ngFor="let item of util.categories;">
+        <div class="top-content" (click)="changeServices(item.name)">
+          <ion-label class="lbl">{{item.name}}</ion-label>
+          <ion-icon [name]=" item.name != activeService ? 'chevron-up' :'chevron-down'" color="dark"></ion-icon>
+        </div>
+        <div class="content" *ngIf="item.name == activeService">
+          <ion-radio-group name="auto" value="tesla">
+            <ion-item *ngFor="let item of util.categories.slice(0,5);let i = index;" lines="none"
+              class="services-list-item">
+              <ion-label slot="start" class="name">{{item.name}}</ion-label>
+              <ion-label slot="end" class="time">{{i+5}} min</ion-label>
+              <ion-label class="price" slot="end">₹{{i+3}}.00</ion-label>
+              <ion-checkbox [value]="item.name" mode="md" slot="end" color="dark"> </ion-checkbox>
+            </ion-item>
+          </ion-radio-group>
+        </div>
+      </div>
+    </div>
+
+    <div class="portfolio-content" *ngIf="activeContent == 'portfolio'">
+      <div class="segment">
+        <ion-segment [(ngModel)]="portfolioContent" mode="ios" color="primary">
+          <ion-segment-button value="photo">
+            <ion-label>Photo</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="video">
+            <ion-label>Video</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+      <ion-row class="photo-segment" *ngIf="portfolioContent =='photo'">
+        <ion-col size="6" *ngFor="let item of util.salonList;">
+          <div class="cover" [ngStyle]="{'background-image': 'url('+item.cover+')'}"></div>
+        </ion-col>
+      </ion-row>
+
+      <div class="video-segment" *ngIf="portfolioContent =='video'">
+        <ion-row *ngFor="let item of util.salonList">
+          <ion-col size="12">
+            <div class="cover" [ngStyle]="{'background-image': 'url('+item.cover+')'}">
+              <div class="overlay">
+                <div class="content">
+                  <ion-icon name="play" color="dark"></ion-icon>
+                </div>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+
+    <div class="reviews-content" *ngIf="activeContent == 'reviews'">
+      <ion-row class="raw-data">
+        <ion-col size="3" class="total-data">
+          <div class="content">
+            <div class="cirlce">
+              <ion-label class="lbl">4.9</ion-label>
+            </div>
+            <ion-label class="total-lbl">Total 22 reviews</ion-label>
+          </div>
+        </ion-col>
+        <ion-col size="3" class="rate-content">
+          <div class="rate-data">
+            <ion-icon name="star" *ngFor="let item of [1,2,3,4,5]"></ion-icon>
+          </div>
+          <div class="rate-data">
+            <ion-icon name="star" *ngFor="let item of [1,2,3,4]"></ion-icon>
+          </div>
+          <div class="rate-data">
+            <ion-icon name="star" *ngFor="let item of [1,2,3]"></ion-icon>
+          </div>
+          <div class="rate-data">
+            <ion-icon name="star" *ngFor="let item of [1,2]"></ion-icon>
+          </div>
+          <div class="rate-data">
+            <ion-icon name="star" *ngFor="let item of [1]"></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col size="6" class="rate-progress">
+          <div class="row-data">
+            <div class="progress" [style.width]="'80%'"></div>
+            <ion-label class="lbl">12</ion-label>
+          </div>
+          <div class="row-data">
+            <div class="progress" [style.width]="'60%'"> </div>
+            <ion-label class="lbl">10</ion-label>
+          </div>
+          <div class="row-data">
+            <div class="progress" [style.width]="'50%'"></div>
+            <ion-label class="lbl">2</ion-label>
+          </div>
+          <div class="row-data">
+            <div class="progress" [style.width]="'40%'"></div>
+            <ion-label class="lbl">2</ion-label>
+          </div>
+          <div class="row-data">
+            <div class="progress" [style.width]="'20%'"></div>
+            <ion-label class="lbl">1</ion-label>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <div class="rate-list">
+        <div class="box-content" *ngFor="let item of util.userList;let i = index;">
+          <div class="staff-list">
+            <div class="prefix">
+              <div class="avatar" [ngStyle]="{'background-image': 'url('+item.image+')'}"></div>
+              <div class="name">
+                <ion-label class="title">{{item.name}}</ion-label>
+                <div class="rate-start"><ion-icon name="star" *ngFor="let item of [1,2,3,4,5]"></ion-icon></div>
+              </div>
+            </div>
+            <ion-label class="rate"> {{i+10}} Min Ago </ion-label>
+          </div>
+          <div class="content">
+            <ion-label class="desc"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+              Ipsum
+              has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+              type
+              and scrambled it to make a type specimen book.</ion-label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="primary-btn" style="margin: 10px 0px;" (click)="onSlot()">
+      <ion-label class="lbl">Book Now</ion-label>
+    </div>
+  </ion-toolbar>
+</ion-footer>

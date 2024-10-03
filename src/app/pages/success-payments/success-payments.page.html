@@ -1,0 +1,83 @@
+<!--
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+-->
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md"></ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="summary-screen">
+
+    <div class="order-success">
+      <img src="assets/images/verify.png" alt="" class="img">
+      <ion-label class="title">Appointments Booked</ion-label>
+      <ion-label class="sub-title">Lorem Ipsum is simply dummy text of the printing and typesetting
+        industry.</ion-label>
+    </div>
+
+    <div class="date-time">
+      <ion-label class="lbl">Date & Time</ion-label>
+      <ion-label class="time">Mon 12, Aug - 10:00 AM</ion-label>
+    </div>
+
+    <div class="date-time">
+      <ion-label class="lbl">Gender Type</ion-label>
+      <ion-label class="time">Man</ion-label>
+    </div>
+
+    <div class="box-content">
+      <div class="top-content">
+        <ion-label class="lbl">Service List</ion-label>
+      </div>
+      <div class="content">
+        <ion-item *ngFor="let item of util.categories.slice(0,3);let i = index;" lines="none"
+          class="services-list-item">
+          <ion-label slot="start" class="name">{{item.name}}</ion-label>
+          <ion-label slot="end" class="time">{{i+5}} min</ion-label>
+          <ion-label class="price" slot="end">₹{{i+3}}.00</ion-label>
+        </ion-item>
+        <ion-item lines="none" class="services-list-item">
+          <ion-label slot="start" class="name">CGST</ion-label>
+          <ion-label class="price" slot="end">₹30.00</ion-label>
+        </ion-item>
+        <ion-item lines="none" class="services-list-item">
+          <ion-label slot="start" class="name">SGST</ion-label>
+          <ion-label class="price" slot="end">₹30.00</ion-label>
+        </ion-item>
+      </div>
+    </div>
+
+    <div class="total-item">
+      <ion-label class="title">Total Item (3)</ion-label>
+      <ion-label class="price">₹30.00</ion-label>
+    </div>
+    <div class="total-item">
+      <ion-label class="title">Coupon Discount</ion-label>
+      <ion-label class="price">₹30.00</ion-label>
+    </div>
+    <div class="total-item-price">
+      <ion-label class="title">Total Price</ion-label>
+      <ion-label class="price">₹96.00</ion-label>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-row style="margin: 10px 0px;">
+      <ion-col size="6">
+        <div class="white-btn" (click)="onHome()">
+          <ion-label class="lbl">Back to Home</ion-label>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="primary-btn" (click)="onList()">
+          <ion-label class="lbl">View Details</ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

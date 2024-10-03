@@ -1,0 +1,57 @@
+<!--
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+-->
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="select-gender">
+    <ion-label class="title">Please select your <br> Gender </ion-label>
+
+    <ion-row>
+      <ion-col size="6">
+        <div class="gender-content" (click)="changeGender('man')" [style.background-color]="'#D7F3FE'">
+          <div [ngStyle]="{'background-image': 'url(assets/images/gender/man.png)'}" class="img">
+            <ion-icon [name]="selected == 'man' ? 'checkmark-circle':'ellipse-outline'" class="icon-selected"
+              [color]="selected == 'man' ? 'secondary':'dark'"></ion-icon>
+            <div class="bottom-content">
+              <ion-label class="lbl">Man</ion-label>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="gender-content" (click)="changeGender('women')" [style.background-color]="'#FFECEE'">
+          <div [ngStyle]="{'background-image': 'url(assets/images/gender/woman.png)'}" class="img">
+            <ion-icon [name]="selected == 'women' ? 'checkmark-circle':'ellipse-outline'" class="icon-selected"
+              [color]="selected == 'women' ? 'secondary':'dark'"></ion-icon>
+            <div class="bottom-content">
+              <ion-label class="lbl">Women</ion-label>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="gender-content" (click)="changeGender('both')" [style.background-color]="'#F9EEFE'">
+          <div [ngStyle]="{'background-image': 'url(assets/images/gender/user.png)'}" class="img">
+            <ion-icon [name]="selected == 'both' ? 'checkmark-circle':'ellipse-outline'" class="icon-selected"
+              [color]="selected == 'both' ? 'secondary':'dark'"></ion-icon>
+            <div class="bottom-content">
+              <ion-label class="lbl">Both</ion-label>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <div class="primary-btn next-btn" (click)="onNext()">
+      <ion-label class="lbl">Next</ion-label>
+    </div>
+  </div>
+</ion-content>

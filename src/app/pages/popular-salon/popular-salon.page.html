@@ -1,0 +1,56 @@
+<!--
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+-->
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-button (click)="onBack()" color="dark">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Popular Salons</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="popular-screen">
+    <ion-row *ngFor="let item of util.salonList;let i =index;" class="row-content" (click)="onInfo(i)">
+      <ion-col size="3">
+        <div class="cover" [ngStyle]="{'background-image': 'url('+item.cover+')'}">
+          <div class="favourite"> <ion-icon name="heart-outline" color="medium"></ion-icon> </div>
+        </div>
+      </ion-col>
+      <ion-col size="9">
+        <div class="content">
+          <div class="title-content-bottom">
+            <ion-label class="title"> {{item.name}} </ion-label>
+            <div class="end-date"> <ion-icon name="star" color="warning"></ion-icon> <ion-label class="lbl">
+                {{item.rate}}
+              </ion-label> </div>
+          </div>
+          <div class="address-content-bottom">
+            <ion-icon name="location-outline" color="medium"></ion-icon>
+            <ion-label class="address">{{ (item.address.length>25)? (item.address | slice:0:25)+'..':(item.address)
+              }}</ion-label>
+          </div>
+          <div class="bottom-content-bottom">
+            <div class="prefix">
+              <ion-icon name="walk-outline"></ion-icon>
+              <ion-label class="distance"> {{item.distance}} </ion-label>
+            </div>
+            <div class="open-lbl" *ngIf="i % 2 == 0">
+              <ion-label class="lbl">Open</ion-label>
+            </div>
+            <div class="close-lbl" *ngIf="i % 2 != 0">
+              <ion-label class="lbl">Close</ion-label>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

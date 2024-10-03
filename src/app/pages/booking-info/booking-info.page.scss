@@ -1,0 +1,231 @@
+/*
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+*/
+.title-content-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  /* Alinea verticalmente el badge */
+}
+
+ion-badge {
+  font-size: 12px; /* Ajusta el tamaño del texto dentro del badge */
+  padding: 4px 8px; /* Ajusta el tamaño del badge */
+  border-radius: 10px; /* Da un aspecto redondeado */
+  color: #fff; /* Color del texto */
+  margin-left: 10px; /* Añade espacio entre el nombre del servicio y el badge */
+}
+
+ion-header {
+  padding-top: 0px !important;
+  --border-width: 0 !important;
+  --box-shadow: none !important;
+}
+
+ion-toolbar {
+  --background: transparent !important;
+  --padding-start: 10px !important;
+  --border-width: 0 !important;
+  --box-shadow: none !important;
+}
+
+.toolbar-container {
+  padding: 0px !important;
+  --background: transparent !important;
+  --border-width: 0 !important;
+}
+
+ion-header .no-border {
+  --border-width: 0 !important;
+  --box-shadow: none !important;
+}
+
+.backicon {
+  margin-left: -20px; /* Ajusta la distancia entre el icono y el texto */
+  font-size: 8px;
+  font-weight: bold;
+}
+
+.back {
+  margin-left: 0px; /* Ajusta la distancia entre el icono y el texto */
+  font-size: 12px;
+  font-weight: bold;
+}
+
+ion-content {
+  margin-top: 1px; /* Para asegurarte de que el contenido no esté pegado al header */
+  margin-bottom: 100px;
+}
+
+.summary-screen {
+  padding-top: 1px;
+  padding-bottom: 20px;
+}
+
+.date-time {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Alinea verticalmente */
+  margin-bottom: 10px;
+}
+
+.lbl {
+  font-weight: bold;
+  color: #000;
+  flex-basis: 30%; /* Define el ancho del label */
+  text-align: left; /* Asegúrate que el texto esté a la izquierda */
+}
+
+.time {
+  text-align: right;
+  color: #555;
+  flex-basis: 70%; /* Define el ancho del valor */
+  word-wrap: break-word; /* Para evitar que el texto salga del contenedor */
+}
+
+
+.box-content {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.salon-list {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.services-list-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+
+.total-item-price {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.align-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -18px;
+  margin-left: -20px;
+  margin-bottom: -20px;
+}
+
+.title-center ion-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+ion-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box-content {
+  padding: 1rem;
+  background-color: #f9f9f9;
+}
+
+.top-content {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.services-list-item {
+  margin-bottom: 0.5rem;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.price {
+  text-align: right;
+  font-size: 1rem;
+  color: #333;
+}
+
+.total-item-price {
+  border-top: 1px solid #ccc;
+  padding-top: 0.5rem;
+  font-weight: bold;
+}
+
+.total-item-price .price {
+  font-size: 1.2rem;
+  color: #000;
+}
+
+/* Estilos para el cuadro de información */
+.info-box {
+  max-width: 100%;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  border: 1px solid var(--ion-color-dark);
+  box-shadow: 2px 3px var(--ion-color-dark);
+  border-radius: 10px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+/* Filas dentro del cuadro */
+.info-row {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+/* Estilo para las etiquetas (Name, PhoneNumber, Email) */
+.info-label {
+  font-weight: bold;
+  color: #000000;
+  font-size: 12px;
+  text-align: left;
+}
+
+/* Estilo para los valores (contenido) */
+.info-value {
+  color: #555;
+  word-wrap: break-word; /* Para asegurarse de que los textos largos no se desborden */
+  font-size: 12px;
+  text-align: right;
+}
+
+.info-box1 {
+  max-width: 100%;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  border: 1px solid var(--ion-color-dark);
+  box-shadow: 2px 3px var(--ion-color-dark);
+  border-radius: 10px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  margin-bottom: 80px;
+}
+

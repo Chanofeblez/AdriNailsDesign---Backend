@@ -1,0 +1,42 @@
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+label {
+  font-weight: bold;
+  margin-top: 10px;
+  width: 100%;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  resize: none;
+}
+
+button {
+  background-color: #d4a5a5; /* Rosa viejo */
+  border: none;
+  color: white;
+  padding: 15px 30px; /* Tamaño más grande */
+  text-align: center;
+  font-size: 18px; /* Aumentar el tamaño del texto */
+  margin-top: 20px;
+  cursor: pointer;
+  border-radius: 10px; /* Redondear más el botón */
+  transition: background-color 0.3s ease; /* Suave transición de color */
+}
+
+button:hover {
+  background-color: #c69494; /* Cambia el color al hacer hover */
+}
+
+button:active {
+  background-color: #b57d7d; /* Efecto al hacer click */
+}

@@ -1,0 +1,126 @@
+<!--
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+-->
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="account-screen">
+    <div class="top-content">
+      <div class="avatar">
+        <div class="cover" [ngStyle]="{'background-image': 'url(assets/images/avatar/3.jpg)'}">
+          <div class="image"> <ion-icon name="camera-outline" color="dark"></ion-icon> </div>
+        </div>
+      </div>
+      <ion-label class="title">John Cannery</ion-label>
+      <ion-label class="sub-title">infoitappz.com</ion-label>
+    </div>
+
+    <div class="navigations-button">
+      <div class="item-content">
+        <div class="prefix">
+          <div class="icon-content" [style.background-color]="'#61BFBE'">
+            <ion-icon name="person-outline" color="dark"></ion-icon>
+          </div>
+          <ion-label class="title">My Profile</ion-label>
+        </div>
+        <ion-icon name="chevron-forward-outline" color="dark"></ion-icon>
+      </div>
+
+      <div class="item-content">
+        <div class="prefix">
+          <div class="icon-content" [style.background-color]="'#E0C4F7'">
+            <ion-icon name="card-outline" color="dark"></ion-icon>
+          </div>
+          <ion-label class="title">Payment Methods</ion-label>
+        </div>
+        <ion-icon name="chevron-forward-outline" color="dark"></ion-icon>
+      </div>
+
+      <div class="item-content">
+        <div class="prefix">
+          <div class="icon-content" [style.background-color]="'#FCC4B3'">
+            <ion-icon name="bookmark-outline" color="dark"></ion-icon>
+          </div>
+          <ion-label class="title">Booking History</ion-label>
+        </div>
+        <ion-icon name="chevron-forward-outline" color="dark"></ion-icon>
+      </div>
+
+      <div class="item-content">
+        <div class="prefix">
+          <div class="icon-content" [style.background-color]="'#61BFBE'">
+            <ion-icon name="heart-outline" color="dark"></ion-icon>
+          </div>
+          <ion-label class="title">Favourite's Salon</ion-label>
+        </div>
+        <ion-icon name="chevron-forward-outline" color="dark"></ion-icon>
+      </div>
+
+      <div class="item-content">
+        <div class="prefix">
+          <div class="icon-content" [style.background-color]="'#E0C4F7'">
+            <ion-icon name="notifications-outline" color="dark"></ion-icon>
+          </div>
+          <ion-label class="title">Get Notifications</ion-label>
+        </div>
+        <ion-toggle mode="md" color="secondary" [checked]="true"></ion-toggle>
+      </div>
+
+      <div class="item-content">
+        <div class="prefix">
+          <div class="icon-content" [style.background-color]="'#FCC4B3'">
+            <ion-icon name="lock-closed-outline" color="dark"></ion-icon>
+          </div>
+          <ion-label class="title">Change Password</ion-label>
+        </div>
+        <ion-icon name="chevron-forward-outline" color="dark"></ion-icon>
+      </div>
+
+      <div class="item-content">
+        <div class="prefix">
+          <div class="icon-content" [style.background-color]="'#61BFBE'">
+            <ion-icon name="help-circle-outline" color="dark"></ion-icon>
+          </div>
+          <ion-label class="title">Privacy Policy</ion-label>
+        </div>
+        <ion-icon name="chevron-forward-outline" color="dark"></ion-icon>
+      </div>
+
+      <div class="item-content">
+        <div class="prefix">
+          <div class="icon-content" [style.background-color]="'#E0C4F5'">
+            <ion-icon name="information-circle-outline" color="dark"></ion-icon>
+          </div>
+          <ion-label class="title">About us</ion-label>
+        </div>
+        <ion-icon name="chevron-forward-outline" color="dark"></ion-icon>
+      </div>
+
+      <div class="item-content">
+        <div class="prefix">
+          <div class="icon-content" [style.background-color]="'#FCC4B3'">
+            <ion-icon name="log-out-outline" color="dark"></ion-icon>
+          </div>
+          <ion-label class="title">Logout</ion-label>
+        </div>
+        <ion-icon name="chevron-forward-outline" color="dark"></ion-icon>
+      </div>
+
+
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <app-tabs [navigation]="'account'"></app-tabs>
+  </ion-toolbar>
+</ion-footer>

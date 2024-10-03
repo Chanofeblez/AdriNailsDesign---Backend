@@ -1,0 +1,72 @@
+<!--
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+-->
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title>Chats</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="chat-screen">
+    <div class="chat-loader" *ngIf="chatLoader == true">
+      <div class="inline-loader">
+        <ion-item lines="none" *ngFor="let item of util.userList">
+          <ion-avatar slot="start">
+            <ion-skeleton-text [animated]="true"></ion-skeleton-text>
+          </ion-avatar>
+          <ion-label>
+            <h3>
+              <ion-skeleton-text [animated]="true" style="width: 50%;"></ion-skeleton-text>
+            </h3>
+            <p>
+              <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+            </p>
+          </ion-label>
+        </ion-item>
+      </div>
+    </div>
+
+    <div class="real-chat" *ngIf="chatDisplay == true">
+      <div class="stories-chat-list">
+        <swiper-container #swiper slides-per-view="5.2">
+          <swiper-slide *ngFor="let item of util.userList;let i = index;">
+            <div class="avtar-list" (click)="onChat(i)">
+              <div class="avatar" [ngStyle]="{'background-image': 'url('+item.image+')'}">
+                <div class="live" *ngIf="i == 0"> <ion-label class="live-lbl">Live</ion-label> </div>
+                <div *ngIf="i != 0" [ngClass]="i % 2==0 ?'online-circle':'offline-circle'"></div>
+              </div>
+              <ion-label class="title">{{item.name.split(' ')[0]}}</ion-label>
+            </div>
+          </swiper-slide>
+        </swiper-container>
+      </div>
+      <div class="real-chat-list">
+        <div class="chat-item-list" *ngFor="let item of util.userList;let i = index;" (click)="onChat(i)">
+          <div class="first">
+            <div class="avatar" [ngStyle]="{'background-image': 'url('+item.image+')'}">
+              <div [ngClass]="i % 2==0 ?'online-circle':'offline-circle'"></div>
+            </div>
+            <div class="name-content">
+              <ion-label class="name">{{item.name}}</ion-label>
+              <ion-label class="last-message">You can change every details</ion-label>
+            </div>
+          </div>
+          <div class="last">
+            <ion-label class="time-bold" *ngIf="i % 2==0">{{i+1}}m ago</ion-label>
+            <ion-label class="time" *ngIf="i % 2 !=0"> {{i+1}}m ago</ion-label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <app-tabs [navigation]="'chat'"></app-tabs>
+  </ion-toolbar>
+</ion-footer>

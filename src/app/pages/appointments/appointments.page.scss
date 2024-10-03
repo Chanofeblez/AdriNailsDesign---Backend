@@ -1,0 +1,95 @@
+/*
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+*/
+ion-segment {
+  --background: transparent; /* Fondo transparente */
+  --indicator-color: #d4a5a5; /* Color de la línea de selección */
+  justify-content: space-around; /* Asegura que los botones estén bien distribuidos */
+  width: 100%;
+}
+
+ion-segment-button {
+  flex-grow: 1; /* Hace que cada botón ocupe el mismo espacio */
+  text-align: center;
+  font-size: 14px; /* Ajusta el tamaño de la fuente */
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+.content {
+  padding: 5px;  // Ajusta el padding general para crear espacio dentro del contenedor
+}
+
+.name {
+  display: block;
+  margin-bottom: 2px;  // Espacio entre los nombres
+}
+
+.service-name {
+  margin-bottom: 3px;  // Espacio entre el precio y otros elementos
+}
+
+.date {
+  display: flex;  // Alinea el ícono y la fecha horizontalmente
+  align-items: center;
+  margin-top: 3px;  // Ajusta el margen superior para darle más espacio entre la fecha y el elemento anterior
+}
+
+.appointment-screen {
+  padding-bottom: 80px;  // Ajusta este valor según el tamaño del footer
+}
+
+
+.navigations-button {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px 15px;
+}
+
+.item-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.prefix {
+  display: flex;
+  align-items: center;
+}
+
+.icon-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #E0C4F7; /* Color del fondo del ícono */
+  margin-right: 15px;
+}
+
+ion-icon {
+  font-size: 24px;
+  color: #333; /* Color del ícono */
+}
+
+.title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.chevron-icon {
+  color: #333;
+  font-size: 20px;
+}
+
+
+
+

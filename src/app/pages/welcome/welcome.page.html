@@ -1,0 +1,62 @@
+<!--
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+-->
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="onSkip()" color="medium">
+        Skip
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="welcome-screen">
+    <swiper-container #swiper (slidechange)="changed()" slides-per-view="1" autoplay="true">
+      <swiper-slide>
+        <div class="data-content">
+          <img src="assets/images/sliders/1.png" alt="" class="img">
+          <ion-label class="title">Explore Barber Shop <br> in Your Area </ion-label>
+          <ion-label class="sub-title">When it comes to staffing, look for experienced, highly skilled professionals who
+            can provide excellent service to your customers</ion-label>
+        </div>
+      </swiper-slide>
+
+      <swiper-slide>
+        <div class="data-content">
+          <img src="assets/images/sliders/2.png" alt="" class="img">
+          <ion-label class="title">Book Your Favourite <br> Barber Shop </ion-label>
+          <ion-label class="sub-title">Offer special promotions and discounts, and leverage social media and other
+            digital marketing channels to reach your target audience</ion-label>
+        </div>
+      </swiper-slide>
+
+      <swiper-slide>
+        <div class="data-content">
+          <img src="assets/images/sliders/3.png" alt="" class="img">
+          <ion-label class="title">Let's Make Your More <br> Beautiful </ion-label>
+          <ion-label class="sub-title">When it comes to equipment and supplies, invest in high-quality tools and
+            products that will last for a long time</ion-label>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+
+    <ion-row class="bottom-navigation">
+      <ion-col size="7">
+        <div class="progress">
+          <div [ngClass]="activeIndex == item ? 'active-dots':'dots'" *ngFor="let item of [0,1,2]"></div>
+        </div>
+      </ion-col>
+      <ion-col size="5">
+        <div class="primary-btn slider-btn" (click)="onNext()">
+          <ion-label class="lbl">Next</ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

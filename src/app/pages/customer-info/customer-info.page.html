@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <!-- Botón de atrás -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Customer Info</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Botón de atrás dentro del contenido -->
+  <ion-buttons style="margin-bottom: 10px;margin-top: 10px;">
+    <ion-back-button defaultHref="/" text="Back" style="color: #EFA9BA;"></ion-back-button>
+  </ion-buttons>
+
+  <!-- Customer Info Card -->
+  <ion-card *ngIf="customer" style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <ion-card-header>
+      <ion-card-title style="font-size: 22px; font-weight: bold; text-align: center; color: #EFA9BA;">{{ customer.name }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Email:</strong> {{ customer.email }}</p>
+      <p><strong>Phone:</strong> {{ customer.phoneNumber }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Encabezado de citas con color modificado -->
+  <ion-text style="font-size: 20px; font-weight: bold; text-align: center; margin: 20px 0; display: block; color: #EFA9BA;">Appointments</ion-text>
+
+  <!-- Appointments List -->
+  <ion-list *ngIf="appointments.length > 0" lines="none" style="padding: 10px;">
+    <ion-item *ngFor="let appointment of appointments" style="margin-bottom: 10px; border-radius: 15px; border: 1px solid #e0e0e0; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);">
+      <ion-label>
+        <h2 style="font-size: 18px; font-weight: bold; color: #3d3d3d;">{{ appointment.serviceName }}</h2>
+        <p style="font-size: 14px; color: #666;">{{ appointment.appointmentDate }} - {{ formatAppointmentTime(appointment.appointmentTime) }}</p>
+        <p><strong>Status:</strong> <span [style.color]="getStatusColor(appointment.status)">{{ appointment.status }}</span></p>
+        <!-- Agregar el costo total del servicio -->
+        <p><strong>Total Cost:</strong> ${{ appointment.totalCost }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- No Appointments Message -->
+  <ion-text *ngIf="appointments.length === 0" style="text-align: center; color: #a0a0a0; font-size: 18px; font-weight: bold; display: flex; justify-content: center; height: 100%; margin-top: 20px;">
+    No appointments found for this customer.
+  </ion-text>
+
+
+</ion-content>

@@ -1,0 +1,77 @@
+<!--
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+-->
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-button (click)="onBack()" color="dark">
+        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Sign Up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="login-screen">
+    <ion-label class="title">Create an Account</ion-label>
+    <ion-label class="sub-title">Sign up now to begin an amazing journey</ion-label>
+
+    <ion-item lines="none" class="item-input">
+      <ion-input placeholder="Full Name" type="name"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none" class="item-input">
+      <ion-input placeholder="Email" type="email"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none" class="item-input">
+      <ion-label class="lbl">🇮🇳 +91 | </ion-label>
+      <ion-input placeholder="Mobile Number" type="number"></ion-input>
+    </ion-item>
+
+    <ion-item lines="none" class="item-input">
+      <ion-input placeholder="Password" type="password"></ion-input>
+      <ion-icon slot="end" [name]="passwordView == false ?'eye-outline' :'eye-off-outline'"
+        (click)="toggePassword()"></ion-icon>
+    </ion-item>
+
+
+    <div class="primary-btn login-btn" (click)="onVerify()">
+      <ion-label class="lbl">Sign Up</ion-label>
+    </div>
+
+    <ion-label class="no-account" (click)="onBack()">Have an account? <span class="bold">SIGN IN</span> </ion-label>
+
+    <ion-row class="or-content">
+      <ion-col size="4">
+        <div class="line"></div>
+      </ion-col>
+      <ion-col size="4">
+        <ion-label class="lbl">Or Sign up with</ion-label>
+      </ion-col>
+      <ion-col size="4">
+        <div class="line"></div>
+      </ion-col>
+    </ion-row>
+
+    <div class="social-network">
+      <div class="btn" (click)="onVerify()">
+        <ion-icon name="logo-facebook" color="dark"></ion-icon>
+      </div>
+      <div class="btn" (click)="onVerify()">
+        <ion-icon name="logo-google" color="dark"></ion-icon>
+      </div>
+      <div class="btn" (click)="onVerify()">
+        <ion-icon name="logo-twitter" color="dark"></ion-icon>
+      </div>
+      <div class="btn" (click)="onVerify()">
+        <ion-icon name="logo-instagram" color="dark"></ion-icon>
+      </div>
+    </div>
+  </div>
+</ion-content>

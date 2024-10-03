@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar class="no-border">
+    <ion-buttons slot="start">
+      <ion-button  color="dark">
+        <ion-icon slot="icon-only" name="chevron-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="courseForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+    <label for="courseName">Course Name:</label>
+    <input id="courseName" formControlName="name" type="text" />
+
+    <label for="description">Description:</label>
+    <textarea id="description" formControlName="description"></textarea>
+
+    <label for="image">Upload Image:</label>
+    <input id="image" type="file" (change)="onFileChange($event, 'image')" />
+
+    <label for="pdf">Upload PDF:</label>
+    <input id="pdf" type="file" (change)="onFileChange($event, 'pdf')" />
+
+    <label for="videos">Upload Videos:</label>
+    <input id="videos" type="file" multiple (change)="onFileChange($event, 'videos')" />
+
+    <button type="submit">Submit</button>
+  </form>
+</ion-content>
+

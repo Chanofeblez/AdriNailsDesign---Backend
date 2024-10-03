@@ -1,0 +1,31 @@
+<!--
+  Authors : initappz (Rahul Jograna)
+  Website : https://initappz.com/
+  App Name : Salon - 2 This App Template Source code is licensed as per the
+  terms found in the Website https://initappz.com/license
+  Copyright and Good Faith Purchasers © 2023-present initappz.
+-->
+
+<div class="tabs-container">
+  <div class="tab-data" (click)="onNavigate('appointments')">
+    <ion-icon name="reader" [ngClass]="navigation === 'appointments' ? 'active-icon' : 'simple-icon'"
+              [color]="navigation === 'appointments' ? 'dark' : 'light'"></ion-icon>
+  </div>
+  <div class="tab-data" (click)="onNavigate('gallery')">
+    <ion-icon name="images-outline" [ngClass]="navigation === 'gallery' ? 'active-icon' : 'simple-icon'"
+              [color]="navigation === 'gallery' ? 'dark' : 'light'"></ion-icon>
+  </div>
+  <div class="tab-data" (click)="onNavigate('course')">
+    <ion-icon name="book-outline" [ngClass]="navigation === 'course' ? 'active-icon' : 'simple-icon'"
+              [color]="navigation === 'course' ? 'dark' : 'light'"></ion-icon>
+  </div>
+  <div class="tab-data" (click)="onNavigate('chats')">
+    <ion-icon name="chatbubble-ellipses" [ngClass]="navigation === 'chats' ? 'active-icon' : 'simple-icon'"
+              [color]="navigation === 'chats' ? 'dark' : 'light'"></ion-icon>
+  </div>
+  <div class="tab-data" (click)="onNavigate('accounts')">
+    <ion-icon name="person" [ngClass]="navigation === 'accounts' ? 'active-icon' : 'simple-icon'"
+              [color]="navigation === 'accounts' ? 'dark' : 'light'"></ion-icon>
+  </div>
+</div>
+
