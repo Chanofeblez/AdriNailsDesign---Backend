@@ -23,16 +23,6 @@ public class Course {
 
     private BigDecimal price;
 
-    // Campo para almacenar la URL o ruta de la imagen de presentación
-    private String imageUrl;
-
-    // Campo para almacenar la URL o ruta del archivo PDF (teoría)
-    private String pdfUrl;
-
-    // Relación de uno a muchos con la entidad Video
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-    private List<Video> videos;
-
     @Enumerated(EnumType.STRING)
     private CourseStatus status;
 
