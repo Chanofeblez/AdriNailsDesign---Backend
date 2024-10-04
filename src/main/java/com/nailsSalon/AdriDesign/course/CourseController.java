@@ -29,6 +29,7 @@ public class CourseController {
   private CourseService courseService;
 
   // Crear un curso con imagen de presentación
+  @PostMapping
   public Course createCourse(@RequestBody Course course) {
     return courseService.createCourse(course);
   }
