@@ -31,5 +31,10 @@ public class CourseService {
   public void deleteCourse(UUID id) {
     courseRepository.deleteById(id);
   }
+
+  public boolean verifyPayment(UUID courseId, UUID userId) {
+    // Logic to verify if the user has paid for the course
+    return true; // Return true if the user has paid
+  }
 }
 
