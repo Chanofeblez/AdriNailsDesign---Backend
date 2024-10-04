@@ -1,15 +1,19 @@
 package com.nailsSalon.AdriDesign.course;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nailsSalon.AdriDesign.appointment.AppointmentController;
 import com.nailsSalon.AdriDesign.video.Video;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +33,25 @@ public class CourseController {
     // Crear un curso con posibilidad de subir imagen y PDF
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Course createCourse(
-            @RequestPart("course") Course course,
+            @RequestPart("course") String courseJson,
             @RequestPart(value = "image", required = false) MultipartFile image,
             @RequestPart(value = "pdf", required = false) MultipartFile pdf,
             @RequestPart(value = "videos", required = false) List<MultipartFile> videos,
             HttpServletRequest request) {
+
+      logger.info("course1: {}");
+
+      // Convierte el JSON a tu objeto Course usando ObjectMapper
+      ObjectMapper objectMapper = new ObjectMapper();
+      Course course = null;
+
+      try {
+        // Convierte el JSON a tu objeto Course
+        course = objectMapper.readValue(courseJson, Course.class);
+      } catch (JsonProcessingException e) {
+        logger.error("Error al deserializar el JSON del curso", e);
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El JSON del curso es inválido", e);
+      }
 
         logger.info("course: {}", course);
 
