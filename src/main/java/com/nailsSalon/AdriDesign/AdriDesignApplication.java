@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.HashMap;
 import java.util.Map;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {org.springframework.boot.web.servlet.filter.OrderedFormContentFilter.class})
 public class AdriDesignApplication {
 
 	public static void main(String[] args) {
