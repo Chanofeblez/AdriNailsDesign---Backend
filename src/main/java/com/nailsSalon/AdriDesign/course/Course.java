@@ -13,21 +13,24 @@ import java.util.UUID;
 @Data
 public class Course {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private UUID id;
 
-    private String title;
+  private String title;
 
-    private String description;
+  private String description;
 
-    private BigDecimal price;
+  private BigDecimal price;
 
-    @Enumerated(EnumType.STRING)
-    private CourseStatus status;
+  private String imageUrl;  // Nuevo campo para la imagen
 
-    // Getters and Setters
+  @Enumerated(EnumType.STRING)
+  private CourseStatus status;
+
+  // Getters and Setters
 }
+
 
 enum CourseStatus {
     ACTIVE, INACTIVE

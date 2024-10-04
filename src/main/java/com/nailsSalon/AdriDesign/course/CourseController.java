@@ -1,11 +1,18 @@
 package com.nailsSalon.AdriDesign.course;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -20,10 +27,29 @@ public class CourseController {
   @Autowired
   private CourseService courseService;
 
-  // Crear un curso (solo con título, descripción y precio)
-  @PostMapping
-  public Course createCourse(@RequestBody Course course) {
-    logger.info("Creando curso: {}", course);
+  // Crear un curso con imagen de presentación
+  @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+  public Course createCourse(
+    @RequestPart("course") String courseJson,
+    @RequestPart(value = "image", required = false) MultipartFile image) {
+
+    // Convierte el JSON a tu objeto Course usando ObjectMapper
+    ObjectMapper objectMapper = new ObjectMapper();
+    Course course = null;
+
+    try {
+      course = objectMapper.readValue(courseJson, Course.class);
+    } catch (JsonProcessingException e) {
+      logger.error("Error al deserializar el JSON del curso", e);
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El JSON del curso es inválido", e);
+    }
+
+    // Si hay una imagen, la subimos y guardamos su URL
+    if (image != null && !image.isEmpty()) {
+      String imageUrl = courseService.uploadFile(image);  // Servicio para manejar la subida
+      course.setImageUrl(imageUrl);
+    }
+
     return courseService.createCourse(course);
   }
 
@@ -38,11 +64,31 @@ public class CourseController {
     return course.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
   }
 
-  // Actualizar un curso
   @PutMapping("/{id}")
-  public ResponseEntity<Course> updateCourse(@PathVariable UUID id, @RequestBody Course course) {
+  public ResponseEntity<Course> updateCourse(@PathVariable UUID id,
+                                             @RequestPart("course") String courseJson,
+                                             @RequestPart(value = "image", required = false) MultipartFile image) {
+
     Optional<Course> existingCourse = courseService.getCourseById(id);
     if (existingCourse.isPresent()) {
+
+      // Convierte el JSON a tu objeto Course usando ObjectMapper
+      ObjectMapper objectMapper = new ObjectMapper();
+      Course course = null;
+
+      try {
+        course = objectMapper.readValue(courseJson, Course.class);
+      } catch (JsonProcessingException e) {
+        logger.error("Error al deserializar el JSON del curso", e);
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El JSON del curso es inválido", e);
+      }
+
+      // Subir nueva imagen si se proporciona
+      if (image != null && !image.isEmpty()) {
+        String imageUrl = courseService.uploadFile(image);
+        course.setImageUrl(imageUrl);
+      }
+
       course.setId(id);  // Asegurar que estamos actualizando el curso correcto
       return ResponseEntity.ok(courseService.updateCourse(course));
     } else {
@@ -56,4 +102,5 @@ public class CourseController {
     return ResponseEntity.noContent().build();
   }
 }
+
 
