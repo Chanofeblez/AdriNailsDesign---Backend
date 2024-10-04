@@ -3,6 +3,7 @@ package com.nailsSalon.AdriDesign.course;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nailsSalon.AdriDesign.servicio.Servicio;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,28 +29,7 @@ public class CourseController {
   private CourseService courseService;
 
   // Crear un curso con imagen de presentación
-  @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-  public Course createCourse(
-    @RequestPart("course") String courseJson,
-    @RequestPart(value = "image", required = false) MultipartFile image) {
-
-    // Convierte el JSON a tu objeto Course usando ObjectMapper
-    ObjectMapper objectMapper = new ObjectMapper();
-    Course course = null;
-
-    try {
-      course = objectMapper.readValue(courseJson, Course.class);
-    } catch (JsonProcessingException e) {
-      logger.error("Error al deserializar el JSON del curso", e);
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El JSON del curso es inválido", e);
-    }
-
-    // Si hay una imagen, la subimos y guardamos su URL
-    if (image != null && !image.isEmpty()) {
-      String imageUrl = courseService.uploadFile(image);  // Servicio para manejar la subida
-      course.setImageUrl(imageUrl);
-    }
-
+  public Course createCourse(@RequestBody Course course) {
     return courseService.createCourse(course);
   }
 
@@ -86,7 +66,7 @@ public class CourseController {
       // Subir nueva imagen si se proporciona
       if (image != null && !image.isEmpty()) {
         String imageUrl = courseService.uploadFile(image);
-        course.setImageUrl(imageUrl);
+        course.setImagePath(imageUrl);
       }
 
       course.setId(id);  // Asegurar que estamos actualizando el curso correcto

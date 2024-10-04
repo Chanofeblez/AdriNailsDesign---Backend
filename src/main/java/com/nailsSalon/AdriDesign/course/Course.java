@@ -23,7 +23,8 @@ public class Course {
 
   private BigDecimal price;
 
-  private String imageUrl;  // Nuevo campo para la imagen
+  @Column(nullable = false)
+  private String imagePath;
 
   @Enumerated(EnumType.STRING)
   private CourseStatus status;

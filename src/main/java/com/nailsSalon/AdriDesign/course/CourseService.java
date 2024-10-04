@@ -1,10 +1,12 @@
 package com.nailsSalon.AdriDesign.course;
 
+import com.nailsSalon.AdriDesign.servicio.Servicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -22,7 +24,10 @@ public class CourseService {
   private final String uploadDir = "/path/to/uploads/";
 
   public Course createCourse(Course course) {
+      // Validación de negocio antes de guardar
+      validateCourse(course);
     return courseRepository.save(course);
+
   }
 
   public List<Course> getAllCourses() {
@@ -44,8 +49,8 @@ public class CourseService {
   // Subir archivo (imagen de presentación)
   public String uploadFile(MultipartFile file) {
     try {
-      // Asegúrate de que el directorio de subida exista
-      Path uploadPath = Paths.get(uploadDir);
+      // Asegúrate de que el directorio de subida existe
+      Path uploadPath = Paths.get("/path/to/uploads/");
       if (!Files.exists(uploadPath)) {
         Files.createDirectories(uploadPath); // Crea el directorio si no existe
       }
@@ -57,13 +62,22 @@ public class CourseService {
       return filePath.toString();  // Retorna la ruta o URL del archivo
 
     } catch (IOException e) {
-      throw new RuntimeException("Error al subir archivo: " + file.getOriginalFilename(), e);
+      throw new RuntimeException("Error uploading file: " + file.getOriginalFilename(), e);
     }
   }
+
 
   public boolean verifyPayment(UUID courseId, UUID userId) {
     // Logic to verify if the user has paid for the course
     return true; // Return true if the user has paid
+  }
+
+  private void validateCourse(Course course) {
+    // Ejemplo de validación: Verificar que el precio no sea negativo
+    if (course.getPrice().compareTo(BigDecimal.ZERO) < 0) {
+      throw new IllegalArgumentException("El precio no puede ser negativo");
+    }
+    // Puedes agregar más validaciones según las necesidades del negocio
   }
 
 }
