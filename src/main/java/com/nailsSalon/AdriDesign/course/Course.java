@@ -24,7 +24,12 @@ public class Course {
   private BigDecimal price;
 
   @Column(nullable = false)
-  private String imagePath;
+  private String imagePath;  // Ruta de la imagen
+  @Column(nullable = false)
+  private String videoPath;  // Ruta del video
+  @Column(nullable = false)
+  private String pdfPath;    // Ruta del archivo PDF
+
 
   @Enumerated(EnumType.STRING)
   private CourseStatus status;
