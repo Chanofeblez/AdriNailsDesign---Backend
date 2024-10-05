@@ -48,7 +48,14 @@ public class ServicioVariantController {
         return serviceVariantService.createServiceVariant(serviceVariant);
     }
 
-    @PutMapping("/{id}")
+  @PostMapping("/list")
+  public List<ServicioVariant> createServiceVariants(@RequestBody List<ServicioVariant> serviceVariants) {
+    LOGGER.info("Creando lista de ServicioVariants {}", serviceVariants);
+    return serviceVariantService.createServiceVariants(serviceVariants);
+  }
+
+
+  @PutMapping("/{id}")
     public ResponseEntity<ServicioVariant> updateServiceVariant(@PathVariable UUID id, @RequestBody ServicioVariant serviceVariantDetails) {
         try {
             ServicioVariant updatedServiceVariant = serviceVariantService.updateServiceVariant(id, serviceVariantDetails);

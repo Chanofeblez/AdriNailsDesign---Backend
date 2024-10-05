@@ -39,6 +39,12 @@ public class ServicioVariantService {
         return serviceVariantRepository.save(serviceVariant);
     }
 
+  // Método para guardar una lista de variantes
+  public List<ServicioVariant> createServiceVariants(List<ServicioVariant> serviceVariants) {
+    // Iterar y guardar cada objeto en la base de datos
+    return serviceVariantRepository.saveAll(serviceVariants);
+  }
+
     public ServicioVariant updateServiceVariant(UUID id, ServicioVariant serviceVariantDetails) {
         return serviceVariantRepository.findById(id).map(serviceVariant -> {
             serviceVariant.setName(serviceVariantDetails.getName());
