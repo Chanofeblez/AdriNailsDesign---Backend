@@ -47,9 +47,9 @@ public class Customer {
 
     //private List<Appointment> appointments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference // Rompe la recursividad para la relación con SalonPayment
-    private List<SalonPayment> payments = new ArrayList<>();
+    //@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    //@JsonManagedReference // Rompe la recursividad para la relación con SalonPayment
+    //private List<SalonPayment> payments = new ArrayList<>();
 
     private String paymentMethodId;
 
