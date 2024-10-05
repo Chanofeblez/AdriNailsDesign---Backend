@@ -41,6 +41,10 @@ public class ServicioService {
         return servicioRepository.save(service);
     }
 
+  public List<Servicio> createServices(List<Servicio> services) {
+    return servicioRepository.saveAll(services);
+  }
+
     public Servicio updateService(UUID id, Servicio serviceDetails) {
         return servicioRepository.findById(id).map(service -> {
             validateService(serviceDetails); // Validación de negocio

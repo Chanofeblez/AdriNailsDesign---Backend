@@ -45,7 +45,13 @@ public class ServicioController {
         return serviceService.createService(service);
     }
 
-    @PutMapping("/{id}")
+  @PostMapping("/list")
+  public List<Servicio> createServices(@RequestBody List<Servicio> services) {
+    return serviceService.createServices(services);
+  }
+
+
+  @PutMapping("/{id}")
     public ResponseEntity<Servicio> updateService(@PathVariable UUID id, @RequestBody Servicio serviceDetails) {
         try {
             Servicio updatedService = serviceService.updateService(id, serviceDetails);
