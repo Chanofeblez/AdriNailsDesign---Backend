@@ -1,5 +1,6 @@
 package com.nailsSalon.AdriDesign.course;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.nailsSalon.AdriDesign.customer.Customer;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -15,7 +16,8 @@ public class CustomerCourse {
 
   @ManyToOne
   @JoinColumn(name = "customer_id")
-  private Customer customer; // Aquí defines tu entidad Customer
+  @JsonBackReference
+  private Customer customer;
 
   @ManyToOne
   @JoinColumn(name = "course_id")

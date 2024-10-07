@@ -48,6 +48,7 @@ public class Customer {
 
   // Relación con los cursos del cliente
   @OneToMany(mappedBy = "customer")
+  @JsonManagedReference
   private List<CustomerCourse> customerCourses;
 
     //private List<Appointment> appointments = new ArrayList<>();
