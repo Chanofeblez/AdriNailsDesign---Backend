@@ -102,7 +102,24 @@ public class PaymentController {
                     paymentRequest.getCourseId()
             );
 
-          
+          // Lógica adicional para crear la relación en CustomerCourse
+          CustomerCourse customerCourse = new CustomerCourse();
+          Optional<Customer> customerOptional = customerService.getCustomerById(paymentRequest.getCustomerId());
+          if (customerOptional.isPresent()) {
+            customerCourse.setCustomer(customerOptional.get()); // Establecemos el valor del Customer
+          } else {
+            throw new IllegalArgumentException("Customer not found");
+          }
+          Optional<Course> courseOptional = courseService.getCourseById(paymentRequest.getCourseId());
+          if (courseOptional.isPresent()) {
+            customerCourse.setCourse(courseOptional.get());
+          } else {
+            throw new IllegalArgumentException("Course not found");
+          }
+          customerCourse.setPaymentStatus(true);  // Marcamos como pagado
+
+          // Guardamos la relación en la base de datos
+          customerCourseRepository.save(customerCourse);
 
             return ResponseEntity.ok(payment);
         } catch (ApiException e) {
