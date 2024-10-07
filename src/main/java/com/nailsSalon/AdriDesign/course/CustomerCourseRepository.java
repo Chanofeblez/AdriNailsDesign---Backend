@@ -13,7 +13,7 @@ import java.util.UUID;
 public interface CustomerCourseRepository extends JpaRepository<CustomerCourse, Long> {
 
   // Método para verificar si un usuario ha pagado un curso específico
-  Optional<CustomerCourse> findByCustomerIdAndCourseId(Long customerId, UUID courseId);
+  Optional<CustomerCourse> findByCustomerIdAndCourseId(UUID customerId, UUID courseId);
 
   // Busca los cursos pagados por un cliente
   @Query("SELECT c.course FROM CustomerCourse c WHERE c.customer.id = :customerId AND c.paymentStatus = true")

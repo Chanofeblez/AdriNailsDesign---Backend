@@ -34,7 +34,7 @@ public class CourseService {
   }
 
   // Método para verificar si un usuario ha pagado un curso
-  public boolean verifyPayment(UUID courseId, Long userId) {
+  public boolean verifyPayment(UUID courseId, UUID userId) {
     Optional<CustomerCourse> customerCourse = customerCourseRepository.findByCustomerIdAndCourseId(userId, courseId);
     return customerCourse.isPresent() && customerCourse.get().isPaymentStatus();
   }
@@ -115,10 +115,7 @@ public class CourseService {
     }
   }
 
-  public boolean verifyPayment(UUID courseId, UUID userId) {
-    // Logic to verify if the user has paid for the course
-    return true; // Return true if the user has paid
-  }
+
 
   private void validateCourse(Course course) {
     // Ejemplo de validación: Verificar que el precio no sea negativo
