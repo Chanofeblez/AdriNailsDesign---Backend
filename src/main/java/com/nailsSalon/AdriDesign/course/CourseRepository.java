@@ -10,7 +10,6 @@ import java.util.UUID;
 public interface CourseRepository extends JpaRepository<Course, UUID> {
 
     // Métodos personalizados de búsqueda si es necesario
-    List
-      +<Course> findByStatus(CourseStatus status);
+    List<Course> findByStatus(CourseStatus status);
 
 }
