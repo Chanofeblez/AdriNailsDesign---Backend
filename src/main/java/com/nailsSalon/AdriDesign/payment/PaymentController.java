@@ -1,7 +1,12 @@
 package com.nailsSalon.AdriDesign.payment;
 
 import com.nailsSalon.AdriDesign.appointment.AppointmentService;
+import com.nailsSalon.AdriDesign.course.Course;
 import com.nailsSalon.AdriDesign.course.CourseService;
+import com.nailsSalon.AdriDesign.course.CustomerCourse;
+import com.nailsSalon.AdriDesign.course.CustomerCourseRepository;
+import com.nailsSalon.AdriDesign.customer.Customer;
+import com.nailsSalon.AdriDesign.customer.CustomerService;
 import com.nailsSalon.AdriDesign.dto.PaymentRequestDTO;
 import com.squareup.square.exceptions.ApiException;
 import com.squareup.square.models.Money;
@@ -12,9 +17,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import sun.security.krb5.internal.ccache.MemoryCredentialsCache;
 
 @RestController
 @RequestMapping("/api/payments")
@@ -26,6 +33,10 @@ public class PaymentController {
     private AppointmentService appointmentService;  // Si ya tienes un servicio para Appointment
     @Autowired
     private CourseService courseService;  // Para manejar los cursos
+  @Autowired
+  private CustomerService customerService;  // Para manejar los customers
+  @Autowired
+  private CustomerCourseRepository customerCourseRepository;  // Para manejar los customers
 
 
     @Autowired
@@ -52,7 +63,7 @@ public class PaymentController {
                     paymentRequest.getSourceId(),
                     idempotencyKey,
                     amountMoney,
-                    paymentRequest.getCustomerId(),
+                    paymentRequest.getCustomerId().toString(),
                     paymentRequest.getLocationId(),
                     paymentRequest.getAppointmentId()
             );
@@ -90,6 +101,26 @@ public class PaymentController {
                     paymentRequest.getLocationId(),
                     paymentRequest.getCourseId()
             );
+
+          // Lógica adicional para crear la relación en CustomerCourse
+          CustomerCourse customerCourse = new CustomerCourse();
+          Optional<Customer> customerOptional = customerService.getCustomerById(paymentRequest.getCustomerId());
+          if (customerOptional.isPresent()) {
+            customerCourse.setCustomer(customerOptional.get()); // Establecemos el valor del Customer
+          } else {
+            throw new IllegalArgumentException("Customer not found");
+          }
+          Optional<Course> courseOptional = courseService.getCourseById(paymentRequest.getCourseId());
+          if (courseOptional.isPresent()) {
+            customerCourse.setCourse(courseOptional.get());
+          } else {
+            throw new IllegalArgumentException("Course not found");
+          }
+          customerCourse.setPaymentStatus(true);  // Marcamos como pagado
+
+          // Guardamos la relación en la base de datos
+          customerCourseRepository.save(customerCourse);
+
             return ResponseEntity.ok(payment);
         } catch (ApiException e) {
             return ResponseEntity.status(e.getResponseCode()).body(e.getErrors());

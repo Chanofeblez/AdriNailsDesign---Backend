@@ -80,13 +80,13 @@ public class SquarePaymentService {
         return salonPaymentRepository.save(salonPayment);
     }
 
-    public SalonPayment createCoursePayment(String sourceId, String idempotencyKey, Money amountMoney, String customerId, String locationId, UUID courseId) throws ApiException, IOException {
+    public SalonPayment createCoursePayment(String sourceId, String idempotencyKey, Money amountMoney, UUID customerId, String locationId, UUID courseId) throws ApiException, IOException {
         PaymentsApi paymentsApi = squareClient.getPaymentsApi();
 
         CreatePaymentRequest createPaymentRequest = new CreatePaymentRequest.Builder(sourceId, idempotencyKey)
                 .amountMoney(amountMoney)
                 .autocomplete(true)
-                .customerId(customerId)
+                .customerId(customerId.toString())
                 .locationId(locationId)
                 .referenceId("123456")
                 .build();
@@ -94,7 +94,7 @@ public class SquarePaymentService {
         com.squareup.square.models.Payment squarePayment = paymentsApi.createPayment(createPaymentRequest).getPayment();
 
         // Cargar el objeto Customer desde la base de datos
-        Customer customer = customerRepository.findById(UUID.fromString(customerId))
+        Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
 
         // Cargar el Curso desde la base de datos

@@ -14,7 +14,7 @@ public class PaymentRequestDTO {
 
     private String sourceId; // El ID de la fuente (token de tarjeta)
     private long amount; // Cantidad en centavos
-    private String customerId; // ID del cliente
+    private UUID customerId; // ID del cliente
     private String locationId; // ID de la ubicación de Square
     private UUID appointmentId; // ID de la cita relacionada con el pago
     private UUID courseId;        // ID del curso relacionado con el pago
@@ -37,11 +37,11 @@ public class PaymentRequestDTO {
         this.amount = amount;
     }
 
-    public String getCustomerId() {
+    public UUID getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(UUID customerId) {
         this.customerId = customerId;
     }
 
