@@ -85,6 +85,25 @@ public class CourseService {
     }
   }
 
+  public String uploadFile(MultipartFile file) {
+    try {
+      // Asegúrate de que el directorio de subida existe
+      Path uploadPath = Paths.get("/path/to/uploads/");
+      if (!Files.exists(uploadPath)) {
+        Files.createDirectories(uploadPath);
+      }
+
+      // Crea la ruta completa del archivo
+      Path filePath = uploadPath.resolve(file.getOriginalFilename());
+      Files.write(filePath, file.getBytes());
+
+      return filePath.toString();  // Retorna la ruta del archivo subido
+    } catch (IOException e) {
+      throw new RuntimeException("Error uploading file: " + file.getOriginalFilename(), e);
+    }
+  }
+
+
   public void deleteFile(String filePath) {
     Path path = Paths.get(filePath);
     try {
