@@ -47,27 +47,34 @@ public class CustomerController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/extract-username")
-    public ResponseEntity<Map<String, String>> extractUsername(@RequestBody Map<String, String> tokenRequest) {
-        String token = tokenRequest.get("token");
-        if (token == null || token.isEmpty()) {
-            return ResponseEntity.badRequest().body(Collections.singletonMap("error", "Token is missing"));
-        }
-
-        // Decodificar el token JWT
-        DecodedJWT decodedJWT = JWT.decode(token);
-
-        // Extraer el nombre de usuario del token decodificado
-        String username = decodedJWT.getSubject();
-
-        // Retornar el username dentro de un objeto JSON
-        Map<String, String> response = new HashMap<>();
-        response.put("username", username);
-
-        return ResponseEntity.ok(response);
+  @PostMapping("/extract-username")
+  public ResponseEntity<?> extractCustomer(@RequestBody Map<String, String> tokenRequest) {
+    String token = tokenRequest.get("token");
+    if (token == null || token.isEmpty()) {
+      return ResponseEntity.badRequest().body(Collections.singletonMap("error", "Token is missing"));
     }
 
-    @PostMapping
+    // Decodificar el token JWT
+    DecodedJWT decodedJWT = JWT.decode(token);
+
+    // Extraer el nombre de usuario del token decodificado (en este caso, el email)
+    String email = decodedJWT.getSubject();
+
+    // Buscar el cliente en la base de datos utilizando el email
+    Optional<Customer> customerOptional = customerService.getCustomerByEmail(email);
+
+    // Si no se encuentra el cliente, retornar un error
+    if (!customerOptional.isPresent()) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("error", "Customer not found"));
+    }
+
+    // Si se encuentra el cliente, devolverlo en la respuesta
+    Customer customer = customerOptional.get();
+    return ResponseEntity.ok(customer);
+  }
+
+
+  @PostMapping
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
         try {
             // Encriptamos la contraseña
