@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -27,6 +28,12 @@ public class CourseController {
 
   @Autowired
   private CourseService courseService;
+
+  @GetMapping("/paid-courses")
+  public ResponseEntity<List<Course>> getPaidCourses(@RequestParam Long userId) {
+    List<Course> paidCourses = courseService.findPaidCoursesByUserId(userId);
+    return ResponseEntity.ok(paidCourses);
+  }
 
   // Crear un curso con imagen de presentación
   @PostMapping

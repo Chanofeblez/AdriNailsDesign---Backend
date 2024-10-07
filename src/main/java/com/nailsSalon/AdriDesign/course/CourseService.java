@@ -20,6 +20,9 @@ public class CourseService {
   @Autowired
   private CourseRepository courseRepository;
 
+  @Autowired
+  private CustomerCourseRepository customerCourseRepository;
+
   // Directorio donde se almacenarán los archivos (puede ajustarse según las necesidades)
   private final String uploadDir = "/path/to/uploads/";
 
@@ -28,6 +31,17 @@ public class CourseService {
       validateCourse(course);
     return courseRepository.save(course);
 
+  }
+
+  // Método para verificar si un usuario ha pagado un curso
+  public boolean verifyPayment(UUID courseId, Long userId) {
+    Optional<CustomerCourse> customerCourse = customerCourseRepository.findByCustomerIdAndCourseId(userId, courseId);
+    return customerCourse.isPresent() && customerCourse.get().isPaymentStatus();
+  }
+
+  // Método para obtener los cursos pagados por el usuario
+  public List<Course> findPaidCoursesByUserId(Long userId) {
+    return customerCourseRepository.findCoursesByCustomerIdAndPaymentStatusTrue(userId);
   }
 
   public List<Course> getAllCourses() {
@@ -43,29 +57,44 @@ public class CourseService {
   }
 
   public void deleteCourse(UUID id) {
-    courseRepository.deleteById(id);
-  }
+    Optional<Course> course = courseRepository.findById(id);
 
-  // Subir archivo (imagen de presentación)
-  public String uploadFile(MultipartFile file) {
-    try {
-      // Asegúrate de que el directorio de subida existe
-      Path uploadPath = Paths.get("/path/to/uploads/");
-      if (!Files.exists(uploadPath)) {
-        Files.createDirectories(uploadPath); // Crea el directorio si no existe
+    if (course.isPresent()) {
+      Course existingCourse = course.get();
+
+      // Lógica para eliminar archivos relacionados
+      if (existingCourse.getImagePath() != null) {
+        // Aquí llamas a tu método para eliminar la imagen del almacenamiento
+        deleteFile(existingCourse.getImagePath());
       }
 
-      // Crea la ruta completa del archivo
-      Path filePath = uploadPath.resolve(file.getOriginalFilename());
-      Files.write(filePath, file.getBytes()); // Escribe el archivo en el sistema de archivos
+      if (existingCourse.getVideoPath() != null) {
+        // Elimina el video asociado
+        deleteFile(existingCourse.getVideoPath());
+      }
 
-      return filePath.toString();  // Retorna la ruta o URL del archivo
+      if (existingCourse.getPdfPath() != null) {
+        // Elimina el archivo PDF asociado
+        deleteFile(existingCourse.getPdfPath());
+      }
 
-    } catch (IOException e) {
-      throw new RuntimeException("Error uploading file: " + file.getOriginalFilename(), e);
+      // Finalmente, elimina el curso de la base de datos
+      courseRepository.deleteById(id);
+    } else {
+      throw new RuntimeException("Course not found with ID: " + id);
     }
   }
 
+  public void deleteFile(String filePath) {
+    Path path = Paths.get(filePath);
+    try {
+      Files.deleteIfExists(path); // Elimina el archivo si existe
+      System.out.println("Archivo eliminado: " + filePath);
+    } catch (IOException e) {
+      System.err.println("Error al eliminar el archivo: " + filePath);
+      throw new RuntimeException("Error al eliminar el archivo: " + filePath, e);
+    }
+  }
 
   public boolean verifyPayment(UUID courseId, UUID userId) {
     // Logic to verify if the user has paid for the course
@@ -81,5 +110,3 @@ public class CourseService {
   }
 
 }
-
-

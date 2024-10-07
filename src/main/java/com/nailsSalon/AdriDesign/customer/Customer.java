@@ -3,6 +3,7 @@ package com.nailsSalon.AdriDesign.customer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.nailsSalon.AdriDesign.appointment.Appointment;
+import com.nailsSalon.AdriDesign.course.CustomerCourse;
 import com.nailsSalon.AdriDesign.payment.SalonPayment;
 import com.squareup.square.models.Payment;
 import jakarta.persistence.*;
@@ -44,6 +45,10 @@ public class Customer {
     private boolean accountNotExpired;
     private boolean accountNotLocked;
     private boolean credentialNotExpired;
+
+  // Relación con los cursos del cliente
+  @OneToMany(mappedBy = "customer")
+  private List<CustomerCourse> customerCourses;
 
     //private List<Appointment> appointments = new ArrayList<>();
 
