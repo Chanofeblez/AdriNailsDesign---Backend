@@ -40,7 +40,7 @@ public class CourseService {
   }
 
   // Método para obtener los cursos pagados por el usuario
-  public List<Course> findPaidCoursesByUserId(Long userId) {
+  public List<Course> findPaidCoursesByUserId(UUID userId) {
     return customerCourseRepository.findCoursesByCustomerIdAndPaymentStatusTrue(userId);
   }
 

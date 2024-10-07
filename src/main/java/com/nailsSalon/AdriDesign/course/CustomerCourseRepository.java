@@ -17,6 +17,6 @@ public interface CustomerCourseRepository extends JpaRepository<CustomerCourse, 
 
   // Busca los cursos pagados por un cliente
   @Query("SELECT c.course FROM CustomerCourse c WHERE c.customer.id = :customerId AND c.paymentStatus = true")
-  List<Course> findCoursesByCustomerIdAndPaymentStatusTrue(@Param("customerId") Long customerId);
+  List<Course> findCoursesByCustomerIdAndPaymentStatusTrue(@Param("customerId") UUID customerId);
 }
 

@@ -30,7 +30,7 @@ public class CourseController {
   private CourseService courseService;
 
   @GetMapping("/paid-courses")
-  public ResponseEntity<List<Course>> getPaidCourses(@RequestParam Long userId) {
+  public ResponseEntity<List<Course>> getPaidCourses(@RequestParam UUID userId) {
     List<Course> paidCourses = courseService.findPaidCoursesByUserId(userId);
     return ResponseEntity.ok(paidCourses);
   }
