@@ -49,7 +49,7 @@ public class AppointmentController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/user/{userId}")
+    @GetMapping("/user/{userEmail}")
     public ResponseEntity<List<Appointment>> getAppointmentsByUserEmail(@PathVariable String userEmail) {
         logger.info("user: {}", userEmail);
         List<Appointment> appointments = appointmentService.getAppointmentsByUserEmail(userEmail);
