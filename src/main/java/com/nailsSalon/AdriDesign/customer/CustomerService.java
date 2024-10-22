@@ -1,5 +1,6 @@
 package com.nailsSalon.AdriDesign.customer;
 
+import com.nailsSalon.AdriDesign.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -47,14 +48,19 @@ public class CustomerService {
     public Customer createCustomer(Customer customer) {
 
         // Verificar si el email es válido
-        if (!checkValidezEmail(customer.getEmail())) {
-            throw new IllegalArgumentException("Email " + customer.getEmail() + " no es válido");
-        }
+      if (!checkValidezEmail(customer.getEmail())) {
+        throw new InvalidEmailException("Email " + customer.getEmail() + " no es válido.");
+      }
 
         // Verificar si el email ya existe
-        if (customerRepository.existsByEmail(customer.getEmail())) {
-            throw new IllegalArgumentException("The email " + customer.getEmail() + " already exists.");
-        }
+      if (customerRepository.existsByEmail(customer.getEmail())) {
+        throw new EmailAlreadyExistsException("The email " + customer.getEmail() + " already exists.");
+      }
+
+      // Verificar si el phoneNumber ya existe
+      if (customerRepository.existsByPhoneNumber(customer.getPhoneNumber())) {
+        throw new PhoneNumberAlreadyExistsException("The phone number " + customer.getPhoneNumber() + " already exists.");
+      }
 
         // Configurar las propiedades de seguridad del cliente
         customer.setEnabled(true);

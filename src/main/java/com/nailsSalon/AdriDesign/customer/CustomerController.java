@@ -1,5 +1,6 @@
 package com.nailsSalon.AdriDesign.customer;
 
+import com.nailsSalon.AdriDesign.exception.*;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.nailsSalon.AdriDesign.exception.ResourceNotFoundException;
@@ -75,7 +76,7 @@ public class CustomerController {
 
 
   @PostMapping
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<Object> createCustomer(@RequestBody Customer customer) {
         try {
             // Encriptamos la contraseña
             customer.setPassword(customerService.encriptPassword(customer.getPassword()));
@@ -87,9 +88,15 @@ public class CustomerController {
             // Creamos el cliente
             Customer createdCustomer = customerService.createCustomer(customer);
 
-            return ResponseEntity.status(HttpStatus.CREATED).body(createdCustomer);
+          return ResponseEntity.status(HttpStatus.CREATED).body(createdCustomer);
+        } catch (EmailAlreadyExistsException | PhoneNumberAlreadyExistsException e) {
+          return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        } catch (InvalidEmailException e) {
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (IllegalArgumentException e) {
+          return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An unexpected error occurred.");
         }
     }
 
