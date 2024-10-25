@@ -25,10 +25,10 @@ public class Course {
 
   @Column(nullable = false)
   private String imagePath;  // Ruta de la imagen
-  @Column(nullable = false)
-  private String videoPath;  // Ruta del video
-  @Column(nullable = false)
-  private String pdfPath;    // Ruta del archivo PDF
+  @ElementCollection
+  private List<String> videoPaths; // Rutas de los videos
+  @ElementCollection
+  private List<String> pdfPaths; // Rutas de los archivos PDF
 
 
   @Enumerated(EnumType.STRING)
