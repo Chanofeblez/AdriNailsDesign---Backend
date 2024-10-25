@@ -45,8 +45,15 @@ public class CourseService {
   }
 
   public List<Course> getAllCourses() {
-    return courseRepository.findAll();
+    List<Course> courses = courseRepository.findAll();
+    courses.forEach(course -> {
+      System.out.println("Course ID: " + course.getId());
+      System.out.println("Video Paths: " + course.getVideoPath());
+      System.out.println("PDF Paths: " + course.getPdfPath());
+    });
+    return courses;
   }
+
 
   public Optional<Course> getCourseById(UUID id) {
     return courseRepository.findById(id);
