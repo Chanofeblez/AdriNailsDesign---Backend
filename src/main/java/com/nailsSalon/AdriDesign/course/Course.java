@@ -27,16 +27,14 @@ public class Course {
   private String imagePath;  // Ruta de la imagen
 
   @ElementCollection(fetch = FetchType.EAGER)
-  @CollectionTable(name = "course_pdf_paths", joinColumns = @JoinColumn(name = "course_id"))
-  @Column(name = "pdfPaths")
-  private List<String> pdfPaths;
-
-  @ElementCollection(fetch = FetchType.EAGER)
   @CollectionTable(name = "course_video_paths", joinColumns = @JoinColumn(name = "course_id"))
-  @Column(name = "videoPaths")
+  @Column(name = "video_paths")  // Ajusta al nombre exacto de la columna en la DB
   private List<String> videoPaths;
 
-
+  @ElementCollection(fetch = FetchType.EAGER)
+  @CollectionTable(name = "course_pdf_paths", joinColumns = @JoinColumn(name = "course_id"))
+  @Column(name = "pdf_paths")  // Ajusta al nombre exacto de la columna en la DB
+  private List<String> pdfPaths;
 
   @Enumerated(EnumType.STRING)
   private CourseStatus status;
