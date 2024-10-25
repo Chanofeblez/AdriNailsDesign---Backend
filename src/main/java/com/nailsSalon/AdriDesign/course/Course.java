@@ -25,9 +25,9 @@ public class Course {
 
   @Column(nullable = false)
   private String imagePath;  // Ruta de la imagen
-  @ElementCollection
+  @ElementCollection(fetch = FetchType.EAGER)
   private List<String> videoPaths; // Rutas de los videos
-  @ElementCollection
+  @ElementCollection(fetch = FetchType.EAGER)
   private List<String> pdfPaths; // Rutas de los archivos PDF
 
 
