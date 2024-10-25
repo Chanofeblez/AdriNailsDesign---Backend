@@ -48,8 +48,8 @@ public class CourseService {
     List<Course> courses = courseRepository.findAll();
     courses.forEach(course -> {
       System.out.println("Course ID: " + course.getId());
-      System.out.println("Video Paths: " + course.getVideoPath());
-      System.out.println("PDF Paths: " + course.getPdfPath());
+      System.out.println("Video Paths: " + course.getVideoPaths());
+      System.out.println("PDF Paths: " + course.getPdfPaths());
     });
     return courses;
   }
@@ -75,14 +75,14 @@ public class CourseService {
         deleteFile(existingCourse.getImagePath());
       }
 
-      if (existingCourse.getVideoPath() != null) {
+      if (existingCourse.getVideoPaths() != null) {
         // Elimina todos los videos asociados
-        existingCourse.getVideoPath().forEach(videoPath -> deleteFile(videoPath));
+        existingCourse.getVideoPaths().forEach(videoPath -> deleteFile(videoPath));
       }
 
-      if (existingCourse.getPdfPath() != null) {
+      if (existingCourse.getPdfPaths() != null) {
         // Elimina todos los PDFs asociados
-        existingCourse.getPdfPath().forEach(pdfPath -> deleteFile(pdfPath));
+        existingCourse.getPdfPaths().forEach(pdfPath -> deleteFile(pdfPath));
       }
 
       // Finalmente, elimina el curso de la base de datos

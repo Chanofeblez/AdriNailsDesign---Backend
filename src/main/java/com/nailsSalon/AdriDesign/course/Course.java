@@ -26,9 +26,14 @@ public class Course {
   @Column(nullable = false)
   private String imagePath;  // Ruta de la imagen
   @ElementCollection(fetch = FetchType.EAGER)
-  private List<String> videoPath; // Rutas de los videos
+  @CollectionTable(name = "course_video_paths", joinColumns = @JoinColumn(name = "course_id"))
+  @Column(name = "videoPaths")
+  private List<String> videoPaths;
+
   @ElementCollection(fetch = FetchType.EAGER)
-  private List<String> pdfPath; // Rutas de los archivos PDF
+  @CollectionTable(name = "course_pdf_paths", joinColumns = @JoinColumn(name = "course_id"))
+  @Column(name = "pdfPaths")
+  private List<String> pdfPaths;
 
 
   @Enumerated(EnumType.STRING)
