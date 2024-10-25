@@ -68,14 +68,14 @@ public class CourseService {
         deleteFile(existingCourse.getImagePath());
       }
 
-      if (existingCourse.getVideoPaths() != null) {
+      if (existingCourse.getVideoPath() != null) {
         // Elimina todos los videos asociados
-        existingCourse.getVideoPaths().forEach(videoPath -> deleteFile(videoPath));
+        existingCourse.getVideoPath().forEach(videoPath -> deleteFile(videoPath));
       }
 
-      if (existingCourse.getPdfPaths() != null) {
+      if (existingCourse.getPdfPath() != null) {
         // Elimina todos los PDFs asociados
-        existingCourse.getPdfPaths().forEach(pdfPath -> deleteFile(pdfPath));
+        existingCourse.getPdfPath().forEach(pdfPath -> deleteFile(pdfPath));
       }
 
       // Finalmente, elimina el curso de la base de datos
