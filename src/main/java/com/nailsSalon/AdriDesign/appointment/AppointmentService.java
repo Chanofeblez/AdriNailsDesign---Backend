@@ -114,13 +114,16 @@ public class AppointmentService {
         reservedSlotRepository.save(reservedSlot);
 
       Appointment savedAppointment = appointmentRepository.save(appointment);
+      logger.info("savedAppointment: {}", savedAppointment);
 
       // Obtener el cliente por su email
       Optional<Customer> customerOpt = customerRepository.findByEmail(customerEmail);
       String customerName = customerOpt.map(Customer::getName).orElse("Cliente");
+      logger.info("customerName: {}", customerName);
 
       // Crear el mensaje personalizado
       String message = customerName + " ha reservado un nuevo appointment el " + date + " a las " + time + ".";
+      logger.info("message: {}", message);
 
       // Enviar SMS
       smsService.sendSms("+13058340807", message); // Número de teléfono de tu esposa
