@@ -126,7 +126,7 @@ public class AppointmentService {
       logger.info("message: {}", message);
 
       // Enviar SMS
-      smsService.sendSms("+13058340807", message); // Número de teléfono de tu esposa
+      smsService.sendSms("+13057478113", message); // Número de teléfono de tu esposa
 
       logger.info("messagemessage: {}", message);
 
