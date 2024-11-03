@@ -1,5 +1,6 @@
 package com.nailsSalon.AdriDesign.appointment;
 
+import com.nailsSalon.AdriDesign.customer.Customer;
 import com.nailsSalon.AdriDesign.customer.CustomerRepository;
 import com.nailsSalon.AdriDesign.dto.AppointmentRequestDTO;
 import com.nailsSalon.AdriDesign.exception.ResourceNotFoundException;
@@ -10,6 +11,7 @@ import com.nailsSalon.AdriDesign.servicio.Servicio;
 import com.nailsSalon.AdriDesign.servicio.ServicioRepository;
 import com.nailsSalon.AdriDesign.serviciovariant.ServicioVariant;
 import com.nailsSalon.AdriDesign.serviciovariant.ServicioVariantRepository;
+import com.nailsSalon.AdriDesign.twilio.SMSService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,9 @@ public class AppointmentService {
 
     @Autowired
     private ReservedSlotService reservedSlotService;
+
+    @Autowired
+    private SMSService smsService;
 
     private static final Logger logger = LoggerFactory.getLogger(AppointmentService.class);
 
@@ -108,7 +113,19 @@ public class AppointmentService {
 
         reservedSlotRepository.save(reservedSlot);
 
-        return appointmentRepository.save(appointment);
+      Appointment savedAppointment = appointmentRepository.save(appointment);
+
+      // Obtener el cliente por su email
+      Optional<Customer> customerOpt = customerRepository.findByEmail(customerEmail);
+      String customerName = customerOpt.map(Customer::getName).orElse("Cliente");
+
+      // Crear el mensaje personalizado
+      String message = customerName + " ha reservado un nuevo appointment el " + date + " a las " + time + ".";
+
+      // Enviar SMS
+      smsService.sendSms("+13058340807", message); // Número de teléfono de tu esposa
+
+      return savedAppointment;
     }
 
     public Appointment updateAppointment(UUID id, AppointmentRequestDTO appointmentRequestDTO) {
