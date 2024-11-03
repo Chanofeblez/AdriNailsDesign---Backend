@@ -24,17 +24,20 @@ public class SMSService {
 
   public void sendSms(String to, String message) {
 
-    // Inicializar Twilio dentro del método
-    Twilio.init(accountSid, authToken);
-    logger.info("to: {}", to);
-    logger.info("message: {}", message);
-    logger.info("accountSid: {}", accountSid);
-    logger.info("authToken: {}", authToken);
-    logger.info("twilioPhoneNumber: {}", twilioPhoneNumber);
-    Message.creator(
-      new PhoneNumber(to),
-      new PhoneNumber(twilioPhoneNumber),
-      message
-    ).create();
+    try {
+      Twilio.init(accountSid, authToken);
+      logger.info("to: {}", to);
+      logger.info("message: {}", message);
+      logger.info("accountSid: {}", accountSid);
+      logger.info("authToken: {}", authToken);
+      logger.info("twilioPhoneNumber: {}", twilioPhoneNumber);
+      Message.creator(
+        new PhoneNumber(to),
+        new PhoneNumber(twilioPhoneNumber),
+        message
+      ).create();
+    } catch (Exception e) {
+      logger.error("Error al enviar el SMS: ", e);
+    }
   }
 }
