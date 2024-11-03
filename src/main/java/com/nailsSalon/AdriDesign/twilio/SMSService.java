@@ -27,6 +27,7 @@ public class SMSService {
     logger.info("message: {}", message);
     logger.info("accountSid: {}", accountSid);
     logger.info("authToken: {}", authToken);
+    logger.info("twilioPhoneNumber: {}", twilioPhoneNumber);
     // Inicializar Twilio dentro del método
     Twilio.init(accountSid, authToken);
     Message.creator(
