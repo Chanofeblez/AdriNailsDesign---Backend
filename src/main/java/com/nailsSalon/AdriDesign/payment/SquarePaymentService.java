@@ -37,7 +37,7 @@ public class SquarePaymentService {
                                 CourseRepository courseRepository) {
         this.squareClient = new SquareClient.Builder()
                 .accessToken(accessToken)
-                .environment(Environment.SANDBOX) // Cambia a "production" para producción
+                .environment(Environment.PRODUCTION) // Cambia a "production" para producción
                 .build();
         this.customerRepository = customerRepository;
         this.appointmentRepository = appointmentRepository;
