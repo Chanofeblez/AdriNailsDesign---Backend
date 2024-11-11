@@ -97,9 +97,9 @@ public class PaymentController {
                     .currency("USD")
                     .build();
 
-        logger.info("amountMoney: {}", amountMoney);
-
             String idempotencyKey = UUID.randomUUID().toString();
+
+        logger.info("idempotencyKey: {}", idempotencyKey);
 
             SalonPayment payment = squarePaymentService.createCoursePayment(
                     paymentRequest.getSourceId(),
@@ -109,6 +109,8 @@ public class PaymentController {
                     paymentRequest.getLocationId(),
                     paymentRequest.getCourseId()
             );
+
+        logger.info("payment: {}", payment);
 
           // Lógica adicional para crear la relación en CustomerCourse
           CustomerCourse customerCourse = new CustomerCourse();
