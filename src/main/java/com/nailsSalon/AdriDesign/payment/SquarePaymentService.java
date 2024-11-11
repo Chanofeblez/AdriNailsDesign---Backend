@@ -13,6 +13,8 @@ import com.squareup.square.models.CreatePaymentRequest;
 import com.nailsSalon.AdriDesign.customer.Customer;
 import com.squareup.square.models.Money;
 import com.squareup.square.models.Payment;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,8 @@ import java.util.UUID;
 
 @Service
 public class SquarePaymentService {
+
+  private static final Logger logger = LoggerFactory.getLogger(SquarePaymentService.class);
 
     private final SquareClient squareClient;
     private final CustomerRepository customerRepository;
@@ -82,6 +86,13 @@ public class SquarePaymentService {
 
     public SalonPayment createCoursePayment(String sourceId, String idempotencyKey, Money amountMoney, UUID customerId, String locationId, UUID courseId) throws ApiException, IOException {
         PaymentsApi paymentsApi = squareClient.getPaymentsApi();
+
+      logger.info("Service-idempotencyKey: {}", idempotencyKey);
+      logger.info("Service-sourceId: {}", sourceId);
+      logger.info("Service-amount: {}", amountMoney);
+      logger.info("Service-customerId: {}", customerId);
+      logger.info("Service-locationId: {}", locationId);
+      logger.info("Service-courseId: {}", courseId);
 
         CreatePaymentRequest createPaymentRequest = new CreatePaymentRequest.Builder(sourceId, idempotencyKey)
                 .amountMoney(amountMoney)
