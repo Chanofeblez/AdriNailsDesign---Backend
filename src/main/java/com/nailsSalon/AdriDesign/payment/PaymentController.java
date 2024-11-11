@@ -82,9 +82,15 @@ public class PaymentController {
         if (paymentRequest.getSourceId() == null || paymentRequest.getAmount() <= 0) {
             return ResponseEntity.badRequest().body("Invalid payment details");
         }
-        logger.info("PaymentRequest for Course: {}", paymentRequest);
+        logger.info("PaymentRequest for Courseeee: {}", paymentRequest);
+      logger.info("sourceId: {}", paymentRequest.getSourceId());
+      logger.info("amount: {}", paymentRequest.getAmount());
+      logger.info("customerId: {}", paymentRequest.getCustomerId());
+      logger.info("locationId: {}", paymentRequest.getLocationId());
+      logger.info("courseId: {}", paymentRequest.getCourseId());
 
-        try {
+
+      try {
             Money amountMoney = new Money.Builder()
                     .amount(paymentRequest.getAmount()) // cantidad en centavos
                     .currency("USD")
