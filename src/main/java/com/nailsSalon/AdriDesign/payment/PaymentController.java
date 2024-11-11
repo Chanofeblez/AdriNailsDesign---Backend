@@ -132,6 +132,10 @@ public class PaymentController {
           customerCourseRepository.save(customerCourse);
 
             return ResponseEntity.ok(payment);
+        } catch (ApiException e) {
+        logger.error("Square API Exception: {}", e);
+        logger.info("Square API Exception: {}", e);
+            return ResponseEntity.status(e.getResponseCode()).body(e.getErrors());
         } catch (IOException e) {
         logger.error("General Exception: {}", e);
         logger.info("General Exception: {}", e);
