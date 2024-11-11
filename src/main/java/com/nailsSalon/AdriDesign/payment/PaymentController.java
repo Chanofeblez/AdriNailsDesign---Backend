@@ -91,10 +91,13 @@ public class PaymentController {
 
 
       try {
+        logger.info("Dentro del Try: {}");
             Money amountMoney = new Money.Builder()
                     .amount(paymentRequest.getAmount()) // cantidad en centavos
                     .currency("USD")
                     .build();
+
+        logger.info("amountMoney: {}", amountMoney);
 
             String idempotencyKey = UUID.randomUUID().toString();
 
