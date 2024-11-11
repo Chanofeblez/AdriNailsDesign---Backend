@@ -102,7 +102,11 @@ public class SquarePaymentService {
                 .referenceId("123456")
                 .build();
 
+      logger.info("createPaymentRequest: {}", createPaymentRequest);
+
         com.squareup.square.models.Payment squarePayment = paymentsApi.createPayment(createPaymentRequest).getPayment();
+
+      logger.info("squarePayment: {}", squarePayment);
 
         // Cargar el objeto Customer desde la base de datos
         Customer customer = customerRepository.findById(customerId)
