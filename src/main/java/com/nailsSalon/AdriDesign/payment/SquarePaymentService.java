@@ -84,50 +84,61 @@ public class SquarePaymentService {
         return salonPaymentRepository.save(salonPayment);
     }
 
-    public SalonPayment createCoursePayment(String sourceId, String idempotencyKey, Money amountMoney, UUID customerId, String locationId, UUID courseId) throws ApiException, IOException {
-        PaymentsApi paymentsApi = squareClient.getPaymentsApi();
+  public SalonPayment createCoursePayment(String sourceId, String idempotencyKey, Money amountMoney, UUID customerId, String locationId, UUID courseId) throws IOException {
+    PaymentsApi paymentsApi = squareClient.getPaymentsApi();
 
-      logger.info("Service-idempotencyKey: {}", idempotencyKey);
-      logger.info("Service-sourceId: {}", sourceId);
-      logger.info("Service-amount: {}", amountMoney);
-      logger.info("Service-customerId: {}", customerId);
-      logger.info("Service-locationId: {}", locationId);
-      logger.info("Service-courseId: {}", courseId);
+    // Logging initial details
+    logger.info("Service-idempotencyKey: {}", idempotencyKey);
+    logger.info("Service-sourceId: {}", sourceId);
+    logger.info("Service-amount: {}", amountMoney);
+    logger.info("Service-customerId: {}", customerId);
+    logger.info("Service-locationId: {}", locationId);
+    logger.info("Service-courseId: {}", courseId);
 
-        CreatePaymentRequest createPaymentRequest = new CreatePaymentRequest.Builder(sourceId, idempotencyKey)
-                .amountMoney(amountMoney)
-                .autocomplete(true)
-                .customerId(customerId.toString())
-                .locationId(locationId)
-                .referenceId("123456")
-                .build();
+    CreatePaymentRequest createPaymentRequest = new CreatePaymentRequest.Builder(sourceId, idempotencyKey)
+      .amountMoney(amountMoney)
+      .autocomplete(true)
+      .customerId(customerId.toString())
+      .locationId(locationId)
+      .referenceId("123456")
+      .build();
 
-      logger.info("createPaymentRequest: {}", createPaymentRequest);
+    logger.info("createPaymentRequest: {}", createPaymentRequest);
 
-        com.squareup.square.models.Payment squarePayment = paymentsApi.createPayment(createPaymentRequest).getPayment();
-
+    try {
+      com.squareup.square.models.Payment squarePayment = paymentsApi.createPayment(createPaymentRequest).getPayment();
       logger.info("squarePayment: {}", squarePayment);
 
-        // Cargar el objeto Customer desde la base de datos
-        Customer customer = customerRepository.findById(customerId)
-                .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
+      // Cargar el objeto Customer desde la base de datos
+      Customer customer = customerRepository.findById(customerId)
+        .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
 
-        // Cargar el Curso desde la base de datos
-        Course course = courseRepository.findById(courseId)
-                .orElseThrow(() -> new IllegalArgumentException("Course not found"));
+      // Cargar el Curso desde la base de datos
+      Course course = courseRepository.findById(courseId)
+        .orElseThrow(() -> new IllegalArgumentException("Course not found"));
 
-        // Utilizar el constructor para crear el SalonPayment
-        SalonPayment salonPayment = new SalonPayment(
-                customer,
-                course,
-                sourceId,
-                amountMoney.getAmount(),
-                amountMoney.getCurrency(),
-                SalonPayment.PaymentStatus.COMPLETED
-        );
+      // Crear y guardar el pago en la base de datos
+      SalonPayment salonPayment = new SalonPayment(
+        customer,
+        course,
+        sourceId,
+        amountMoney.getAmount(),
+        amountMoney.getCurrency(),
+        SalonPayment.PaymentStatus.COMPLETED
+      );
 
-        return salonPaymentRepository.save(salonPayment);
+      return salonPaymentRepository.save(salonPayment);
+    } catch (ApiException e) {
+      // Log detailed errors from Square's API
+      logger.error("Square API Exception: {}", e.getErrors());
+      throw new RuntimeException("Error creating payment with Square API", e);
+    } catch (Exception ex) {
+      // Log general exceptions
+      logger.error("General Exception: {}", ex.getMessage());
+      throw new RuntimeException("Unexpected error occurred while processing payment", ex);
     }
+  }
+
 
 
 }
